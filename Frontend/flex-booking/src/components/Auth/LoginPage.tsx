@@ -31,8 +31,6 @@ const Login = () => {
     //     roleId: 2,
     //     } as AuthData);
 
-    window.location.reload();
-
     sendRequest(`/profile/login`, 'POST', {
       username: email,
       password: password
@@ -41,6 +39,8 @@ const Login = () => {
         setAuthDataToSessionStorage(response);
 
         setIsLoading(false)
+
+        window.location.reload();
       })
       .catch((error: any) => {
         alert(`Error has been occured during login, error: ${error}`);

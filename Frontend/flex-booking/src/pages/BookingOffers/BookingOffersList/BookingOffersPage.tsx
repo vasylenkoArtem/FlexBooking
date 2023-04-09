@@ -28,7 +28,8 @@ const BookingOffersPage = () => {
          });
    }
 
-   return <BookingOffersList bookingOffers={bookingOffersList ?? []}/>
+   return <>BookingOffersPage</>
+   // return <BookingOffersList bookingOffers={bookingOffersList ?? []}/>
 }
 
 export default BookingOffersPage;
