@@ -1,11 +1,12 @@
 import { Button, Card, Col, Divider, Row } from "antd";
 import AAIcon from "../../../Icons/AAIcon.png";
+import { BookingOffer } from "./types";
 
 interface PassedProps {
-
+    bookingOffer: BookingOffer;
 }
 
-const BookingOfferShortView = (props: PassedProps) => {
+const FlightOfferShortView = (props: PassedProps) => {
     return <>
         <Card
             bordered={true}>
@@ -16,7 +17,7 @@ const BookingOfferShortView = (props: PassedProps) => {
                 <Col span={4} style={{ padding: '8px 0' }}>
                     <b>10:55 AM</b>
 
-                    <div>YYZ</div>
+                    <div>{props.bookingOffer.originOfferLocation.airportCode}</div>
                 </Col>
 
                 <Col span={4} style={{ padding: '8px 0' }}>
@@ -25,26 +26,26 @@ const BookingOfferShortView = (props: PassedProps) => {
                         <br />
                         -------------
                         <br />
-                        <div style={{ color: '0c838a' }}>Direct</div>
+                        <div style={{ color: '#0c838a' }}>Direct</div>
                     </div>
 
                 </Col>
                 <Col span={4} style={{ padding: '8px 0' }}>
                     <b>12:34 AM</b>
-                    <div>LGA</div>
+                    <div>{props.bookingOffer.destinationOfferLocation.airportCode}</div>
                 </Col>
                 <Col span={1}>
                     <Divider type="vertical" style={{ height: "100%" }} />
                 </Col>
                 <Col span={6} style={{ textAlign: 'center' }}>
                     <h1>$232</h1>
-                    <Button>SEE DEAL</Button>
+                    <Button onClick={() => window.open(`trips/${props.bookingOffer.id}`, '_blank')}>SEE DEAL</Button>
                 </Col>
             </Row>
         </Card>
     </>
 }
 
-export default BookingOfferShortView;
+export default FlightOfferShortView;
 
 

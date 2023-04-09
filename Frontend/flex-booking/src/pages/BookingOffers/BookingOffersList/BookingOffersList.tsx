@@ -3,7 +3,7 @@ import sendRequest from "../../../helpers/apiHelper";
 import { BookingOffer } from "./types";
 import { isAdminUser } from "../../../helpers/authHelper";
 import { Col, Row } from "antd";
-import BookingOfferShortView from "./BookingOfferShortView";
+import FlightOfferShortView from "./FlightOfferShortView";
 
 interface PassedProps {
     bookingOffers: BookingOffer[]
@@ -11,17 +11,27 @@ interface PassedProps {
 
 const BookingOffersList = (props: PassedProps) => {
 
-
-
     return <>
-        {/* {props.bookingOffers.map(offer => <p>{offer.id}</p>)} */}
-
-        <Row gutter={16}>
-            <Col span={8}>
-                <BookingOfferShortView />
-            </Col>
-
-        </Row>
+        <div style={
+            {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }
+        }>
+            {props.bookingOffers.map(offer => {
+                return <div style={
+                    {
+                        width: '40%',
+                        textAlign: 'center',
+                        marginTop: 5
+                    }
+                }>
+                    <FlightOfferShortView
+                        bookingOffer={offer} />
+                </div>
+            })}
+        </div>
     </>
 }
 

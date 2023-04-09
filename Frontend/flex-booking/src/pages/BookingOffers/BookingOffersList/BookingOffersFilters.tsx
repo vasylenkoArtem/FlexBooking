@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 
 interface PassedProps {
-    setFilters: (filters: GetBookingOfferRequestParameters) => void;
+    applyFilters: (filters: GetBookingOfferRequestParameters) => void;
     isLoading: boolean;
 }
 
@@ -91,7 +91,7 @@ const BookingOffersFilters = (props: PassedProps) => {
 
             <Button
                 icon={<SearchOutlined />}
-                onClick={() => props.setFilters(filters)}
+                onClick={() => props.applyFilters(filters)}
             >
                 Search
             </Button>

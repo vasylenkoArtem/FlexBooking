@@ -1,8 +1,8 @@
 export type BookingOffer = {
     id: number;
     offerType: string;
-    originOfferLocation: string;
-    destinationOfferLocation: string;
+    originOfferLocation: OfferLocation;
+    destinationOfferLocation: OfferLocation;
     departureDateUtc: Date;
     arrivalDateUtc: Date;
 }
@@ -13,4 +13,11 @@ export type GetBookingOfferRequestParameters = {
     departureDate?: Date;
     arrivalDate?: Date;
     passengersCount: number;
+}
+
+type OfferLocation = {
+    airportCode?: string;
+    busStation?: string;
+    city: string;
+    trainStation?: string;
 }

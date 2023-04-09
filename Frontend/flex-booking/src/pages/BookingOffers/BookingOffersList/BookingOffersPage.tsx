@@ -7,18 +7,13 @@ import BookingOffersFilters from "./BookingOffersFilters";
 
 const BookingOffersPage = () => {
 
-   const [filters, setFilters] = useState<GetBookingOfferRequestParameters | undefined>(undefined);
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const [bookingOffersList, setBookingOffersList] = useState<BookingOffer[] | undefined>(undefined);
 
-   useEffect(() => {
-      getTripList();
-   }, [filters]);
-
-   const getTripList = () => {
+   const getTripList = (filters: GetBookingOfferRequestParameters) => {
       setIsLoading(true)
 
-      sendRequest(`/booking-offers`)
+      sendRequest(`/booking-offers`, 'POST', filters)
          .then((response: any) => {
             setBookingOffersList(response);
             setIsLoading(false)
@@ -30,7 +25,10 @@ const BookingOffersPage = () => {
    }
 
    return <>
-      <BookingOffersFilters setFilters={setFilters} isLoading={isLoading} />
+      <BookingOffersFilters
+         applyFilters={(newFilters: GetBookingOfferRequestParameters) => getTripList(newFilters)}
+         isLoading={isLoading}
+      />
 
       <div
          style={{
