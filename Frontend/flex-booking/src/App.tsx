@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import TripDetailsPage from './pages/Trip/TripDetails/TripDetailsPage';
-import TripListPage from './pages/Trip/TripsList/TripsListPage';
+import BookingOffersPage from './pages/Trip/TripsList/BookingOffersPage';
 import CarRentalsListPage from './pages/CarRentals/CarRentalsListPage';
 import HotelListPage from './pages/Hotel/HotelListPage';
 
@@ -16,7 +16,7 @@ const { Header, Content, Footer } = Layout;
 const router = createBrowserRouter([
   {
     path: "trips",
-    element:  <TripListPage />,
+    element:  <BookingOffersPage />,
   },
   {
     path: "trips/:tripId",
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element:  <TripListPage />,
+    element:  <BookingOffersPage />,
   },
   {
     path: "car-rentals",
