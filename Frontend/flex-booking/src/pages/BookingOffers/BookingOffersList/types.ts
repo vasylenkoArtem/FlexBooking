@@ -6,3 +6,11 @@ export type BookingOffer = {
     departureDateUtc: Date;
     arrivalDateUtc: Date;
 }
+
+export type GetBookingOfferRequestParameters = {
+    originCity?: string;
+    destinationCity?: string;
+    departureDate?: Date;
+    arrivalDate?: Date;
+    passengersCount: number;
+}
