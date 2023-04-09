@@ -11,11 +11,11 @@ public class ProfileController: ControllerBase
 {
     // POST: api/profile/login
     [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginDTO loginDto, [FromServices] IMediator mediator)
+    public async Task<IActionResult> Login([FromBody] LoginDTO loginDto, [FromServices] IMediator mediator)
     {
         try
         {
-            var result = mediator.Send(new LoginQuery(loginDto.Username, loginDto.Password));
+            var result = await mediator.Send(new LoginQuery(loginDto.Username, loginDto.Password));
             return Ok(result);
         }
         catch (Exception e)
