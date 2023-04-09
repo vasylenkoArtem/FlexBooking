@@ -15,37 +15,38 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
 import { useEffect, useState } from 'react';
 import sendRequest from '../../helpers/apiHelper';
-import { setAuthDataToSessionStorage } from '../../helpers/authHelper';
+import { AuthData, setAuthDataToSessionStorage } from '../../helpers/authHelper';
 
 const theme = createTheme();
 
 const Login = () => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const signInUser = (email: string, password: string) => {
-        setIsLoading(true)
-        setAuthDataToSessionStorage({
-            userId : 1,
-            roleId: 1,
-            });
+  const signInUser = (email: string, password: string) => {
+    setIsLoading(true)
+    //mock response from server
+    // setAuthDataToSessionStorage({
+    //     userId : 1,
+    //     roleId: 2,
+    //     } as AuthData);
 
-        window.location.reload();
-        
-        // sendRequest(`/profile/login`, 'POST', {
-        //     username: email,
-        //     password: password
-        // })
-        //     .then((response: any) => {
-        //         setAuthDataToSessionStorage(response);
-                
-        //         setIsLoading(false)
-        //     })
-        //     .catch((error: any) => {
-        //         alert(`Error has been occured during login, error: ${error}`);
-        //         setIsLoading(false)
-        //     });
-    }
+    window.location.reload();
+
+    sendRequest(`/profile/login`, 'POST', {
+      username: email,
+      password: password
+    })
+      .then((response: any) => {
+        setAuthDataToSessionStorage(response);
+
+        setIsLoading(false)
+      })
+      .catch((error: any) => {
+        alert(`Error has been occured during login, error: ${error}`);
+        setIsLoading(false)
+      });
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

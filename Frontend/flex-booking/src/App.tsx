@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import TripDetailsPage from './pages/Trip/TripDetails/TripDetailsPage';
+import BoolingOfferDetailsPage from './pages/Trip/BoolingOfferDetailsPage/BoolingOfferDetailsPage';
 import BookingOffersPage from './pages/Trip/TripsList/BookingOffersPage';
 import CarRentalsListPage from './pages/CarRentals/CarRentalsListPage';
 import HotelListPage from './pages/Hotel/HotelListPage';
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "trips/:tripId",
-    element: <TripDetailsPage />
+    element: <BoolingOfferDetailsPage />
   },
   {
     path: "/",

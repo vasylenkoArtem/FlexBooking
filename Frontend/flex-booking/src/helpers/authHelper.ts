@@ -10,9 +10,14 @@
 //     return jwt_decode(token) as JWTDecodedToken;
 // }
 
-type AuthData = {
+enum UserRole {
+    Client = 1,
+    Admin = 2
+}
+
+export type AuthData = {
     userId: number;
-    roleId: number;
+    roleId: UserRole;
 }
 
 const pathToSessionStorageAuthData = `oidc-token`;
@@ -22,7 +27,6 @@ export const setAuthDataToSessionStorage = (authData: AuthData) => {
 }
 
 export const getAuthDataFromSessionStorage = (): AuthData | null => {
-    debugger;
     const sessionStorageItem = localStorage.getItem(pathToSessionStorageAuthData);
 
     if (sessionStorageItem) {
@@ -32,7 +36,12 @@ export const getAuthDataFromSessionStorage = (): AuthData | null => {
     return null;
 }
 
-
 export const removeAuthDataFromSessionStorage = () => {
     localStorage.removeItem(pathToSessionStorageAuthData);
+}
+
+export const isAdminUser = () => {
+    const userData = getAuthDataFromSessionStorage();
+
+    return userData?.roleId === UserRole.Admin;
 }
