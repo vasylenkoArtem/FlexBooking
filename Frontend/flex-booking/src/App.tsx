@@ -6,10 +6,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import BoolingOfferDetailsPage from './pages/Trip/BoolingOfferDetailsPage/BoolingOfferDetailsPage';
-import BookingOffersPage from './pages/Trip/TripsList/BookingOffersPage';
 import CarRentalsListPage from './pages/CarRentals/CarRentalsListPage';
 import HotelListPage from './pages/Hotel/HotelListPage';
+import BookingOffersPage from './pages/BookingOffers/BookingOffersList/BookingOffersPage';
+import BoolingOfferDetailsPage from './pages/BookingOffers/BoolingOfferDetailsPage/BoolingOfferDetailsPage';
 
 const { Header, Content, Footer } = Layout;
 

@@ -1,5 +1,5 @@
 const BoolingOfferDetailsPage = () => {
-return <>TripDetailsPage</>
+return <>BoolingOfferDetailsPage</>
 }
 
 export default BoolingOfferDetailsPage;
