@@ -1,26 +1,88 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { BankOutlined, CarOutlined, RocketOutlined } from '@ant-design/icons';
 
-function App() {
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import TripDetailsPage from './pages/Trip/TripDetails/TripDetailsPage';
+import TripListPage from './pages/Trip/TripsList/TripsListPage';
+import CarRentalsListPage from './pages/CarRentals/CarRentalsListPage';
+import HotelListPage from './pages/Hotel/HotelListPage';
+
+const { Header, Content, Footer } = Layout;
+
+const router = createBrowserRouter([
+  {
+    path: "trips",
+    element:  <TripListPage />,
+  },
+  {
+    path: "trips/:tripId",
+    element: <TripDetailsPage />
+  },
+  {
+    path: "/",
+    element:  <TripListPage />,
+  },
+  {
+    path: "car-rentals",
+    element: <CarRentalsListPage />,
+  },
+  {
+    path: "hotels",
+    element: <HotelListPage />,
+  },
+]);
+
+const App: React.FC = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className="layout">
+      <Header>
+        <div className="logo" />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']}
+          items={[
+            {
+              key: "trips",
+              label: 'Trips',
+              icon:   <a href={`/trips`}><RocketOutlined /></a>
+            },
+            {
+              key: "hotels",
+              label: 'Hotels',
+              icon:   <a href={`/hotels`}><BankOutlined /></a>
+            },
+            {
+              key: "car rentals",
+              label: 'Car Rentals',
+              icon:   <a href={`/car-rentals`}><CarOutlined /></a>
+            }
+          ]}
+        />
+      </Header>
+      <Content style={{ padding: '0 50px' }}>
+        <Breadcrumb style={{ margin: '16px 0' }}>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          <Breadcrumb.Item>Tickets</Breadcrumb.Item>
+          <Breadcrumb.Item>Search</Breadcrumb.Item>
+        </Breadcrumb>
+        <div className="site-layout-content" style={{ background: colorBgContainer }}>
+
+          <RouterProvider router={router} />
+
+        </div>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>Flex Booking</Footer>
+    </Layout>
   );
-}
+};
 
 export default App;
