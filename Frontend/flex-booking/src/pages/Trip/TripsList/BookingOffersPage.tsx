@@ -15,7 +15,7 @@ const BookingOffersPage = () => {
 
     const getTripList = () => {
         setIsLoading(true)
-      
+
         sendRequest(`/booking-offers`)
             .then((response: any) => {
                 setBookingOffersList(response);
@@ -28,6 +28,6 @@ const BookingOffersPage = () => {
     }
 
     return <>Booking Offers</>
-    }
-    
-    export default BookingOffersPage;
+}
+
+export default BookingOffersPage;
