@@ -10,9 +10,9 @@ public class OfferLocation
 
     public string City { get; set; }
 
-    public string AirportCode { get; set; }
+    public string? AirportCode { get; set; }
 
-    public string TrainStation { get; set; }
+    public string? TrainStation { get; set; }
 
-    public string BusStation { get; set; }
+    public string? BusStation { get; set; }
 }

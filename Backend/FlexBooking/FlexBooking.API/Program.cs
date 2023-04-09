@@ -1,6 +1,9 @@
+using System.Reflection;
 using FlexBooking.Domain;
 using FlexBooking.Domain.Helpers;
 using FlexBooking.Domain.Helpers.Contract;
+using FlexBooking.Logic.Queries;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +22,10 @@ builder.Services.AddScoped<IFlexBookingContext, FlexBookingContext>();
 
 // Helpers
 builder.Services.AddScoped<IConnectionStringHelper, ConnectionStringHelper>();
+
+// Mediatr
+// builder.Services.AddMediatR(typeof(LoginQuery).Assembly);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(LoginQuery).Assembly));
 
 
 builder.Services.AddControllers();
