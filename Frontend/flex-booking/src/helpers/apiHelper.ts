@@ -8,7 +8,7 @@ async function sendRequest(
 ) {
    // const authData = getAuthDataFromSessionStorage();
 
-    return fetch(`${baseApiUrl}${url}`,
+    return fetch(`${baseApiUrl}/api${url}`,
         {
             method: httpMethod,
             mode: 'cors',
