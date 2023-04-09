@@ -17,6 +17,8 @@ public class BookingOffersViewModel
 //         }
 //         departureDateUtc: Date;
 //         arrivalDateUtc: Date;
+//         price: float;
+//         companyLogoUrl: string;
 //     }
 
     public BookingOffersViewModel(BookingOffer bookingOffer)
@@ -27,6 +29,8 @@ public class BookingOffersViewModel
         DestinationOfferLocation = bookingOffer.DestinationOfferLocation;
         DepartureDateUtc = bookingOffer.DepartureDateUtc;
         ArrivalDateUtc = bookingOffer.ArrivalDateUtc;
+        Price = bookingOffer.Price;
+        CompanyLogoUrl = bookingOffer.CompanyLogoUrl;
     }
 
     public int Id { get; set; }
@@ -35,4 +39,6 @@ public class BookingOffersViewModel
     public OfferLocation DestinationOfferLocation { get; set; }
     public DateTime DepartureDateUtc { get; set; }
     public DateTime ArrivalDateUtc { get; set; }
+    public float Price { get; set; }
+    public string CompanyLogoUrl { get; set; }
 }

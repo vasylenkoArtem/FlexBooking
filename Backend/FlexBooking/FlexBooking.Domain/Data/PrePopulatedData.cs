@@ -35,7 +35,9 @@ public static class PrePopulatedData
                 DepartureDateUtc = DateTime.UtcNow,
                 ArrivalDateUtc = DateTime.UtcNow.Add(TimeSpan.FromHours(6)), 
                 AvailablePassengerSeats = 100,
-                OfferTypeId = OfferType.Flight
+                OfferTypeId = OfferType.Flight,
+                Price = 800,
+                CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png"
             },
             new()
             {
@@ -45,7 +47,9 @@ public static class PrePopulatedData
                 DepartureDateUtc = DateTime.UtcNow,
                 ArrivalDateUtc = DateTime.UtcNow.Add(TimeSpan.FromHours(6)), 
                 AvailablePassengerSeats = 100,
-                OfferTypeId = OfferType.Train
+                OfferTypeId = OfferType.Train,
+                Price = 250,
+                CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png"
             },
             new()
             {
@@ -55,7 +59,9 @@ public static class PrePopulatedData
                 DepartureDateUtc = DateTime.UtcNow,
                 ArrivalDateUtc = DateTime.UtcNow.Add(TimeSpan.FromHours(6)), 
                 AvailablePassengerSeats = 100,
-                OfferTypeId = OfferType.Bus
+                OfferTypeId = OfferType.Bus,
+                Price = 100,
+                CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png"
             }
         });
         

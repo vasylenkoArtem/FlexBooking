@@ -4,6 +4,7 @@ using FlexBooking.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlexBooking.Domain.Migrations
 {
     [DbContext(typeof(FlexBookingContext))]
-    partial class FlexBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230409222937_AddedPriceAndCompanyLogoUrlFieldsToBookingOffer")]
+    partial class AddedPriceAndCompanyLogoUrlFieldsToBookingOffer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

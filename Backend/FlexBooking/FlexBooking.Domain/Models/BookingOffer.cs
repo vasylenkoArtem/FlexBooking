@@ -20,6 +20,10 @@ public class BookingOffer
     public DateTime ArrivalDateUtc { get; set; }
 
     public int AvailablePassengerSeats { get; set; }
+    
+    public float Price { get; set; }
+    
+    public string CompanyLogoUrl { get; set; }
 
 
     public OfferLocation OriginOfferLocation { get; set; }
