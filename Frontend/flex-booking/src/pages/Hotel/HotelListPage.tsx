@@ -12,6 +12,10 @@ const HotelsListPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [hotelOffers, setHotelOffers] = useState<HotelOffer[] | undefined>(undefined);
 
+    useEffect(() => {
+        getHotelsList('');
+    }, []);
+
     const getHotelsList = (city?: string) => {
         setIsLoading(true)
 

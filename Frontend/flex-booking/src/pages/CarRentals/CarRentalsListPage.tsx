@@ -12,6 +12,10 @@ const CarRentalsListPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [carOffers, setCarOffers] = useState<CarOffer[] | undefined>(undefined);
 
+    useEffect(() => {
+        getCarOfferList('');
+    }, []);
+
     const getCarOfferList = (city?: string) => {
         setIsLoading(true)
 
