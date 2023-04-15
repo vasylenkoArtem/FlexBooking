@@ -9,7 +9,7 @@ import {
 import CarRentalsListPage from './pages/CarRentals/CarRentalsListPage';
 import HotelListPage from './pages/Hotel/HotelListPage';
 import BookingOffersPage from './pages/BookingOffers/BookingOffersList/BookingOffersPage';
-import BoolingOfferDetailsPage from './pages/BookingOffers/BoolingOfferDetailsPage/BoolingOfferDetailsPage';
+import BookingOfferDetailsPage from './pages/BookingOffers/BoolingOfferDetailsPage/BookingOfferDetailsPage';
 
 const { Header, Content, Footer } = Layout;
 
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "trips/:tripId",
-    element: <BoolingOfferDetailsPage />
+    element: <BookingOfferDetailsPage />
   },
   {
     path: "/",
