@@ -9,4 +9,6 @@ public class HotelOfferViewModel
     public string HotelRoomImageUrl { get; set; }
 
     public decimal Price { get; set; }
+    
+    public string Title { get; set; }
 }

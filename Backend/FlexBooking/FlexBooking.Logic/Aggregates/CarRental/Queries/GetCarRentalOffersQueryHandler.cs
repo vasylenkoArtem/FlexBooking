@@ -26,7 +26,8 @@ public class GetCarRentalOffersQueryHandler: IRequestHandler<GetCarRentalOffersQ
             City = domainOffer.City,
             Id = domainOffer.Id,
             Price = domainOffer.Price,
-            CarImageUrl = domainOffer.CarImageUrl
+            CarImageUrl = domainOffer.CarImageUrl,
+            Title = domainOffer.Title
         }).ToList();
     }
 }

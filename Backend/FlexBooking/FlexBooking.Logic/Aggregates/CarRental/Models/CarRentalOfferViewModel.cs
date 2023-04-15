@@ -9,4 +9,6 @@ public class CarRentalOfferViewModel
     public string CarImageUrl { get; set; }
 
     public decimal Price { get; set; }
+    
+    public string Title { get; set; }
 }

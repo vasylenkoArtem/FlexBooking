@@ -28,7 +28,8 @@ public class GetHotelOffersQueryHandler : IRequestHandler<GetHotelOffersQuery, L
             City = domainOffer.City,
             Id = domainOffer.Id,
             Price = domainOffer.Price,
-            HotelRoomImageUrl = domainOffer.HotelRoomImageUrl
+            HotelRoomImageUrl = domainOffer.HotelRoomImageUrl,
+            Title = domainOffer.Title
         }).ToList();
     }
 }
