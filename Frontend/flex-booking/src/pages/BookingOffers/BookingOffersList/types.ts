@@ -1,10 +1,19 @@
 export type BookingOffer = {
     id: number;
-    offerType: string;
+    offerTypeId: OfferType;
     originOfferLocation: OfferLocation;
     destinationOfferLocation: OfferLocation;
     departureDateUtc: Date;
     arrivalDateUtc: Date;
+    price: number;
+    companyLogoUrl: string;
+}
+
+export enum OfferType
+{
+    Flight = 1,
+    Train = 2,
+    Bus = 3
 }
 
 export type GetBookingOfferRequestParameters = {
