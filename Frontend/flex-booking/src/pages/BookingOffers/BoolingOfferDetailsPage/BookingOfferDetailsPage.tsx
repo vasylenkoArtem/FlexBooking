@@ -14,18 +14,18 @@ const BookingOfferDetailsPage = () => {
     let isBus: boolean = false;
     let isTrain: boolean = false
     
-    if (isFlight) {
-        return <>
-            {/*<img src="" alt=""/>*/}
-            <p>Origin: </p>
-            <p>Destination: </p>
-            <p>Price: </p>
-            <p>Departure Date: </p>
-            <p>Arrival Date: </p>
-            <p>Passengers: </p>
+    
+    return <>
+        {/*<img src="" alt=""/>*/}
+        <p>Origin: </p>
+        <p>Destination: </p>
+        <p>Price: </p>
+        <p>Departure Date: </p>
+        <p>Arrival Date: </p>
+        <p>Passengers: </p>
 
-        </>
-    }
+    </>
+    
     
 }
 
