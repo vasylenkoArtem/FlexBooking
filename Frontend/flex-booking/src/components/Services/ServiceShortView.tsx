@@ -14,15 +14,15 @@ const ServiceShortView = (props: PassedProps) => {
             bordered={true}>
             <Row>
                 <Col span={8} style={{ padding: '8px 0' }}>
-                    <img src={props.imageUrl}></img>
+                    <img src={props.imageUrl} style={{width: 200}}></img>
                 </Col>
                 <Col span={8} style={{ padding: '8px 0', textAlign: 'left' }}>
                     <b>{props.service.title}</b>
 
                     <br/> <br/>
 
-                    <div>Queen Room</div>
-                    <div>1 large double bed</div>
+                    <div>Fast check in</div>
+                    <div>Full service maintenance</div>
                     <div style={{color: 'green'}}>FREE cancellation • No prepayment needed</div>
                 </Col>
                 <Col span={1}>
