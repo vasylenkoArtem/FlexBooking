@@ -33,4 +33,21 @@ public class BookingOffers: ControllerBase
         }
         
     }
+
+    [HttpGet("{offerId:int}")]
+    public async Task<IActionResult> GetTripOfferDetailed(int offerId, 
+        [FromServices] IMediator mediator)
+    {
+        try
+        {
+            var query = new GetTripOfferDetailedQuery(offerId);
+            var result = await mediator.Send(query);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return BadRequest(e.Message);
+        }
+    }
 }
