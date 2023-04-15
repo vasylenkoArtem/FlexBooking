@@ -3,7 +3,9 @@ import sendRequest from "../../../helpers/apiHelper";
 import {BookingOffer, OfferType} from "../BookingOffersList/types";
 import {useEffect, useState} from "react";
 import { Badge, Descriptions, Image } from 'antd';
-import {WidthFull} from "@mui/icons-material";
+import CarRentalsList from "../../CarRentals/CarRentalsList";
+import {CarOffer, HotelOffer} from "../../../components/Services/types";
+import HotelsList from "../../Hotel/HotelsList";
 
 const getVehicleTypeString = (offerTypeId: OfferType) => {
     switch (offerTypeId) {
@@ -51,13 +53,21 @@ const getDestinationString = (bookingOffer: BookingOffer | undefined) => {
 
 const BookingOfferDetailsPage = () => {
     const [bookingOffer, setBookingOffer] = useState<BookingOffer | undefined>(undefined);
+    const [carOffers, setCarOffers] = useState<CarOffer[] | undefined>(undefined);
+    const [hotelOffers, setHotelOffers] = useState<HotelOffer[] | undefined>(undefined);
 
     const bookingOfferId = useParams().tripId;    
     
     useEffect(() => {
-        // fetch data here
         getBookingOffer();
     }, []);
+
+    useEffect(() => {
+        if (bookingOffer) {
+            getCarsList(bookingOffer?.destinationOfferLocation.city);
+            getHotelsList(bookingOffer?.destinationOfferLocation.city);
+        }
+    }, [bookingOffer]);
 
     let getBookingOffer = () => {
         sendRequest(`/booking-offers/${bookingOfferId}`, 'GET')
@@ -67,7 +77,30 @@ const BookingOfferDetailsPage = () => {
             .catch((error: any) => {
                 alert(`Error has been occured during get booking offers, error: ${error}`);
             });
+    }
 
+    const getCarsList = (city?: string) => {
+        sendRequest("/car-rentals", 'POST', {
+            city: city
+        })
+            .then((response: any) => {
+                setCarOffers(response);
+            })
+            .catch((error: any) => {
+                alert(`Error has been occured during get car offers, error: ${error}`);
+            });
+    }
+
+    const getHotelsList = (city?: string) => {
+        sendRequest(`/hotel-offers`, 'POST', {
+            city: city
+        })
+            .then((response: any) => {
+                setHotelOffers(response);
+            })
+            .catch((error: any) => {
+                alert(`Error has been occured during get hotel offers, error: ${error}`);
+            });
     }
     
     if (!bookingOffer) {
@@ -96,7 +129,31 @@ const BookingOfferDetailsPage = () => {
                 
                 <Descriptions.Item label="Price" span={3}>${bookingOffer?.price}</Descriptions.Item>
             </Descriptions>
+            
+            <div style={{fontSize: "16px", fontWeight: "600", marginTop: "30px"}}>Car Rentals</div>
+            
+            <div
+                style={{
+                    marginTop: 30
+                }}>
+                <CarRentalsList
+                    carRentalOffers={carOffers ?? []}
+                />
+            </div>
+
+            <div style={{fontSize: "16px", fontWeight: "600", marginTop: "30px"}}>Hotel Rentals</div>
+            
+            <div
+                style={{
+                    marginTop: 30
+                }}>
+                <HotelsList
+                    hotelOffers={hotelOffers ?? []}
+                />
+            </div>
         </>
+    
+    
 }
 
 export default BookingOfferDetailsPage;
