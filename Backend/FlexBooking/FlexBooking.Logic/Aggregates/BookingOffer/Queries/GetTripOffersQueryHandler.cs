@@ -20,11 +20,11 @@ public class GetTripOffersQueryHandler: IRequestHandler<GetTripOffersQuery, List
         var bookingOffers = await _context.BookingOffers
             .Include(bo => bo.OriginOfferLocation)
             .Include(bo => bo.DestinationOfferLocation)
-            .Where(bo => bo.OriginOfferLocation.City == request.BookingOffersDTO.OriginCity
-                         && bo.DestinationOfferLocation.City == request.BookingOffersDTO.DestinationCity
-                         && bo.DepartureDateUtc >= request.BookingOffersDTO.DepartureDate
-                         && bo.ArrivalDateUtc <= request.BookingOffersDTO.ArrivalDate
-                         && bo.AvailablePassengerSeats >= request.BookingOffersDTO.PassengersCount)
+            .Where(bo => bo.OriginOfferLocation.City == request.GetBookingOffersRequestParameters.OriginCity
+                         && bo.DestinationOfferLocation.City == request.GetBookingOffersRequestParameters.DestinationCity
+                         && bo.DepartureDateUtc >= request.GetBookingOffersRequestParameters.DepartureDate
+                         && bo.ArrivalDateUtc <= request.GetBookingOffersRequestParameters.ArrivalDate
+                         && bo.AvailablePassengerSeats >= request.GetBookingOffersRequestParameters.PassengersCount)
             .ToListAsync(cancellationToken);
         
         return bookingOffers.Select(bo => new BookingOffersViewModel(bo)).ToList();

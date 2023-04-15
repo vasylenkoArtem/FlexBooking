@@ -16,7 +16,7 @@ const BookingOffersPage = () => {
    const getTripList = (filters: GetBookingOfferRequestParameters) => {
       setIsLoading(true)
 
-      sendRequest(`/booking-offers`, 'POST', filters)
+      sendRequest(`/booking-offers/search`, 'POST', filters)
          .then((response: any) => {
             setBookingOffersList(response);
             setIsLoading(false)

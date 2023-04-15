@@ -1,6 +1,6 @@
 ﻿namespace FlexBooking.Logic.DTOs;
 
-public class BookingOffersDTO
+public class GetBookingOffersRequestParameters
 {
     // request body:
     // {
