@@ -13,10 +13,14 @@ const BookingOffersPage = () => {
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const [bookingOffersList, setBookingOffersList] = useState<BookingOffer[] | undefined>(undefined);
 
-   const getTripList = (filters: GetBookingOfferRequestParameters) => {
+   useEffect(() => {
+      getTripList(undefined);
+  }, []);
+
+   const getTripList = (filters?: GetBookingOfferRequestParameters) => {
       setIsLoading(true)
 
-      sendRequest(`/booking-offers/search`, 'POST', filters)
+      sendRequest(`/booking-offers/search`, 'POST', filters ?? {})
          .then((response: any) => {
             setBookingOffersList(response);
             setIsLoading(false)

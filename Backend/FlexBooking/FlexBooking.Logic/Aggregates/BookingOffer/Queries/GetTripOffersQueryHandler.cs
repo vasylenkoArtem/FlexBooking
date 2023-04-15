@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FlexBooking.Logic.Handlers;
 
-public class GetTripOffersQueryHandler: IRequestHandler<GetTripOffersQuery, List<BookingOffersViewModel>>
+public class GetTripOffersQueryHandler : IRequestHandler<GetTripOffersQuery, List<BookingOffersViewModel>>
 {
     private readonly IFlexBookingContext _context;
 
@@ -14,19 +14,27 @@ public class GetTripOffersQueryHandler: IRequestHandler<GetTripOffersQuery, List
     {
         _context = context;
     }
-    
-    public async Task<List<BookingOffersViewModel>> Handle(GetTripOffersQuery request, CancellationToken cancellationToken)
+
+    public async Task<List<BookingOffersViewModel>> Handle(GetTripOffersQuery request,
+        CancellationToken cancellationToken)
     {
         var bookingOffers = await _context.BookingOffers
             .Include(bo => bo.OriginOfferLocation)
             .Include(bo => bo.DestinationOfferLocation)
-            .Where(bo => bo.OriginOfferLocation.City == request.GetBookingOffersRequestParameters.OriginCity
-                         && bo.DestinationOfferLocation.City == request.GetBookingOffersRequestParameters.DestinationCity
-                         && bo.DepartureDateUtc >= request.GetBookingOffersRequestParameters.DepartureDate
-                         && bo.ArrivalDateUtc <= request.GetBookingOffersRequestParameters.ArrivalDate
-                         && bo.AvailablePassengerSeats >= request.GetBookingOffersRequestParameters.PassengersCount)
+            .Where(bo =>
+                (string.IsNullOrEmpty(request.GetBookingOffersRequestParameters.OriginCity) ||
+                 bo.OriginOfferLocation.City == request.GetBookingOffersRequestParameters.OriginCity)
+                && (string.IsNullOrEmpty(request.GetBookingOffersRequestParameters.DestinationCity) ||
+                    bo.DestinationOfferLocation.City == request.GetBookingOffersRequestParameters.DestinationCity)
+                && (!request.GetBookingOffersRequestParameters.DepartureDate.HasValue || bo.DepartureDateUtc >=
+                    request.GetBookingOffersRequestParameters.DepartureDate)
+                && (!request.GetBookingOffersRequestParameters.ArrivalDate.HasValue ||
+                    bo.ArrivalDateUtc <= request.GetBookingOffersRequestParameters.ArrivalDate)
+                && (request.GetBookingOffersRequestParameters.PassengersCount == default || bo.AvailablePassengerSeats >=
+                    request.GetBookingOffersRequestParameters.PassengersCount)
+            )
             .ToListAsync(cancellationToken);
-        
+
         return bookingOffers.Select(bo => new BookingOffersViewModel(bo)).ToList();
     }
 }
