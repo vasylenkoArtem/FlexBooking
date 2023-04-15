@@ -2,16 +2,12 @@ import { Button, DatePicker, InputNumber, Select } from "antd";
 import { GetBookingOfferRequestParameters } from "./types";
 import { useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
+import { getCitiesOptions } from "../../../helpers/citiesHelper";
 
 interface PassedProps {
     applyFilters: (filters: GetBookingOfferRequestParameters) => void;
     isLoading: boolean;
 }
-
-
-const onSearch = (value: string) => {
-    console.log('search:', value);
-};
 
 const BookingOffersFilters = (props: PassedProps) => {
 
@@ -35,20 +31,10 @@ const BookingOffersFilters = (props: PassedProps) => {
                 placeholder="Origin City"
                 optionFilterProp="children"
                 onChange={(value: any) => onChangeFilter(value, 'originCity')}
-                onSearch={onSearch}
                 filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-                options={[
-                    {
-                        value: 'Toronto',
-                        label: 'Toronto',
-                    },
-                    {
-                        value: 'Montreal',
-                        label: 'Montreal',
-                    }
-                ]}
+                options={getCitiesOptions()}
             />
 
             <Select
@@ -57,20 +43,10 @@ const BookingOffersFilters = (props: PassedProps) => {
                 placeholder="Destination City"
                 optionFilterProp="children"
                 onChange={(value: any) => onChangeFilter(value, 'destinationCity')}
-                onSearch={onSearch}
                 filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-                options={[
-                    {
-                        value: 'Toronto',
-                        label: 'Toronto',
-                    },
-                    {
-                        value: 'Montreal',
-                        label: 'Montreal',
-                    }
-                ]}
+                options={getCitiesOptions()}
             />
 
             <DatePicker
