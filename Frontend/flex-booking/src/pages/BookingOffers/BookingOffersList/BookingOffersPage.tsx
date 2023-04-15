@@ -4,6 +4,9 @@ import { BookingOffer, GetBookingOfferRequestParameters } from "./types";
 import { isAdminUser } from "../../../helpers/authHelper";
 import BookingOffersList from "./BookingOffersList";
 import BookingOffersFilters from "./BookingOffersFilters";
+import { Button } from "antd";
+import { AddOutlined } from "@mui/icons-material";
+import AddBookingOfferForm from "./BookingOfferForm/AddBookingOfferForm";
 
 const BookingOffersPage = () => {
 
@@ -29,6 +32,18 @@ const BookingOffersPage = () => {
          applyFilters={(newFilters: GetBookingOfferRequestParameters) => getTripList(newFilters)}
          isLoading={isLoading}
       />
+
+      <div style={
+         {
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginRight: '25%',
+            marginLeft: '25%',
+            marginTop: 15
+         }}>
+         <AddBookingOfferForm />
+      </div>
+
 
       <div
          style={{

@@ -27,6 +27,7 @@ const BookingOffersList = (props: PassedProps) => {
                         marginTop: 5
                     }
                 }>
+
                     <FlightOfferShortView
                         bookingOffer={offer} />
                 </div>
