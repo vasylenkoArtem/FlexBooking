@@ -79,7 +79,7 @@ const FlightOfferShortView = (props: PassedProps) => {
             bordered={true}>
             <Row>
                 <Col span={4} style={{ padding: '8px 0' }}>
-                    <img src={props.bookingOffer.companyLogoUrl}></img>
+                    <img src={props.bookingOffer.companyLogoUrl} width={120}></img>
                 </Col>
                 <Col span={4} style={{ padding: '8px 0' }}>
                     <b>{moment.utc(props.bookingOffer.departureDateUtc).local().format('h:mm a').toUpperCase()}</b>
