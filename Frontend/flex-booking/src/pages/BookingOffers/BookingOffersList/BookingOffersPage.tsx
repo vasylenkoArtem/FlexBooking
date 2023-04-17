@@ -15,7 +15,7 @@ const BookingOffersPage = () => {
 
    useEffect(() => {
       getTripList(undefined);
-  }, []);
+   }, []);
 
    const getTripList = (filters?: GetBookingOfferRequestParameters) => {
       setIsLoading(true)
@@ -45,7 +45,13 @@ const BookingOffersPage = () => {
             marginLeft: '25%',
             marginTop: 15
          }}>
-         <AddBookingOfferForm />
+
+         {
+            isAdminUser()
+               ? <AddBookingOfferForm />
+               : null
+         }
+
       </div>
 
 
