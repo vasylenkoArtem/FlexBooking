@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexBooking.API", "FlexBooking.API\FlexBooking.API.csproj", "{365F8570-BE76-472C-B90B-F518FE630F7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexBooking.Domain", "FlexBooking.Domain\FlexBooking.Domain.csproj", "{E120D25C-99C8-432D-8B7B-D82B9849D63A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexBooking.Database", "FlexBooking.Database\FlexBooking.Database.csproj", "{E120D25C-99C8-432D-8B7B-D82B9849D63A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexBooking.Logic", "FlexBooking.Logic\FlexBooking.Logic.csproj", "{7F329682-D558-4C81-9ED6-4036F082DEE7}"
 EndProject

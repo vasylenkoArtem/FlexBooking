@@ -4,7 +4,6 @@ using FlexBooking.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,11 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlexBooking.Domain.Migrations
 {
     [DbContext(typeof(FlexBookingContext))]
-    [Migration("20230409201737_AddedPrePopulatedData")]
-    partial class AddedPrePopulatedData
+    partial class FlexBookingContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace FlexBooking.Domain.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.BookingOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.BookingOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,6 +36,10 @@ namespace FlexBooking.Domain.Migrations
                     b.Property<int>("AvailablePassengerSeats")
                         .HasColumnType("int");
 
+                    b.Property<string>("CompanyLogoUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DepartureDateUtc")
                         .HasColumnType("datetime2");
 
@@ -50,6 +51,9 @@ namespace FlexBooking.Domain.Migrations
 
                     b.Property<int>("OriginOfferLocationId")
                         .HasColumnType("int");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -63,36 +67,42 @@ namespace FlexBooking.Domain.Migrations
                         new
                         {
                             Id = 1,
-                            ArrivalDateUtc = new DateTime(2023, 4, 10, 2, 17, 37, 802, DateTimeKind.Utc).AddTicks(5984),
+                            ArrivalDateUtc = new DateTime(2023, 4, 16, 0, 39, 22, 952, DateTimeKind.Utc).AddTicks(7353),
                             AvailablePassengerSeats = 100,
-                            DepartureDateUtc = new DateTime(2023, 4, 9, 20, 17, 37, 802, DateTimeKind.Utc).AddTicks(5982),
+                            CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png",
+                            DepartureDateUtc = new DateTime(2023, 4, 15, 18, 39, 22, 952, DateTimeKind.Utc).AddTicks(7351),
                             DestinationOfferLocationId = 2,
                             OfferTypeId = 1,
-                            OriginOfferLocationId = 1
+                            OriginOfferLocationId = 1,
+                            Price = 800f
                         },
                         new
                         {
                             Id = 2,
-                            ArrivalDateUtc = new DateTime(2023, 4, 10, 2, 17, 37, 802, DateTimeKind.Utc).AddTicks(5990),
+                            ArrivalDateUtc = new DateTime(2023, 4, 16, 0, 39, 22, 952, DateTimeKind.Utc).AddTicks(7366),
                             AvailablePassengerSeats = 100,
-                            DepartureDateUtc = new DateTime(2023, 4, 9, 20, 17, 37, 802, DateTimeKind.Utc).AddTicks(5990),
+                            CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png",
+                            DepartureDateUtc = new DateTime(2023, 4, 15, 18, 39, 22, 952, DateTimeKind.Utc).AddTicks(7366),
                             DestinationOfferLocationId = 4,
                             OfferTypeId = 2,
-                            OriginOfferLocationId = 3
+                            OriginOfferLocationId = 3,
+                            Price = 250f
                         },
                         new
                         {
                             Id = 3,
-                            ArrivalDateUtc = new DateTime(2023, 4, 10, 2, 17, 37, 802, DateTimeKind.Utc).AddTicks(5992),
+                            ArrivalDateUtc = new DateTime(2023, 4, 16, 0, 39, 22, 952, DateTimeKind.Utc).AddTicks(7368),
                             AvailablePassengerSeats = 100,
-                            DepartureDateUtc = new DateTime(2023, 4, 9, 20, 17, 37, 802, DateTimeKind.Utc).AddTicks(5991),
+                            CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png",
+                            DepartureDateUtc = new DateTime(2023, 4, 15, 18, 39, 22, 952, DateTimeKind.Utc).AddTicks(7367),
                             DestinationOfferLocationId = 6,
                             OfferTypeId = 3,
-                            OriginOfferLocationId = 5
+                            OriginOfferLocationId = 5,
+                            Price = 100f
                         });
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.CarOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.CarOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,6 +121,10 @@ namespace FlexBooking.Domain.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("CarOffers");
@@ -119,20 +133,22 @@ namespace FlexBooking.Domain.Migrations
                         new
                         {
                             Id = 1,
-                            CarImageUrl = "https://www.torontoairportlimousine.com/wp-content/uploads/2019/03/limo-toronto-airport.jpg",
+                            CarImageUrl = "https://cdn2.rcstatic.com/images/car_images/web/toyota/camry_lrg.jpg",
                             City = "Toronto",
-                            Price = 100m
+                            Price = 100m,
+                            Title = "Regular sedan Audi"
                         },
                         new
                         {
                             Id = 2,
-                            CarImageUrl = "https://www.torontoairportlimousine.com/wp-content/uploads/2019/03/limo-toronto-airport.jpg",
+                            CarImageUrl = "https://cdn2.rcstatic.com/images/car_images/web/dodge/durango_lrg.jpg",
                             City = "Montreal",
-                            Price = 100m
+                            Price = 120m,
+                            Title = "Special SUV BMW X2"
                         });
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.HotelOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.HotelOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,6 +167,10 @@ namespace FlexBooking.Domain.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("HotelOffers");
@@ -160,19 +180,21 @@ namespace FlexBooking.Domain.Migrations
                         {
                             Id = 1,
                             City = "Toronto",
-                            HotelRoomImageUrl = "https://www.torontoairportlimousine.com/wp-content/uploads/2019/03/limo-toronto-airport.jpg",
-                            Price = 100m
+                            HotelRoomImageUrl = "https://cf.bstatic.com/xdata/images/hotel/square200/64371688.webp?k=5ef28b75a00b6ef33e969c56783827d927a8a5d3bdfdd71c450b6477d725a7b7&o=&s=1",
+                            Price = 70m,
+                            Title = "San Marine Hotel 4 Star"
                         },
                         new
                         {
                             Id = 2,
                             City = "Montreal",
-                            HotelRoomImageUrl = "https://www.torontoairportlimousine.com/wp-content/uploads/2019/03/limo-toronto-airport.jpg",
-                            Price = 100m
+                            HotelRoomImageUrl = "https://cf.bstatic.com/xdata/images/hotel/square200/232812146.webp?k=76f9ea6d899b7ff326616e78653a8b83af7b276dd74ed07ed7d04a7e8c5c8aa6&o=&s=1",
+                            Price = 115m,
+                            Title = "Amazing View to Falls Hotel"
                         });
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.OfferLocation", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.OfferLocation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -236,7 +258,7 @@ namespace FlexBooking.Domain.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.User", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,15 +298,15 @@ namespace FlexBooking.Domain.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.BookingOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.BookingOffer", b =>
                 {
-                    b.HasOne("FlexBooking.Domain.Models.OfferLocation", "DestinationOfferLocation")
+                    b.HasOne("FlexBooking.Database.Models.OfferLocation", "DestinationOfferLocation")
                         .WithMany()
                         .HasForeignKey("DestinationOfferLocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FlexBooking.Domain.Models.OfferLocation", "OriginOfferLocation")
+                    b.HasOne("FlexBooking.Database.Models.OfferLocation", "OriginOfferLocation")
                         .WithMany()
                         .HasForeignKey("OriginOfferLocationId")
                         .OnDelete(DeleteBehavior.Cascade)

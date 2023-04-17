@@ -1,6 +1,6 @@
 import React from 'react';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { BankOutlined, CarOutlined, RocketOutlined } from '@ant-design/icons';
+import { BankOutlined, CarOutlined, LogoutOutlined, RocketOutlined } from '@ant-design/icons';
 
 import {
   createBrowserRouter,
@@ -10,6 +10,7 @@ import CarRentalsListPage from './pages/CarRentals/CarRentalsListPage';
 import HotelListPage from './pages/Hotel/HotelListPage';
 import BookingOffersPage from './pages/BookingOffers/BookingOffersList/BookingOffersPage';
 import BookingOfferDetailsPage from './pages/BookingOffers/BoolingOfferDetailsPage/BookingOfferDetailsPage';
+import { removeAuthDataFromSessionStorage } from './helpers/authHelper';
 
 const { Header, Content, Footer } = Layout;
 
@@ -50,6 +51,12 @@ const App: React.FC = () => {
           mode="horizontal"
           defaultSelectedKeys={['2']}
           items={[
+            {
+              key: "logout",
+              label: 'Logout',
+              icon:   <a href="" onClick={() =>  removeAuthDataFromSessionStorage()}><LogoutOutlined /></a>,
+              danger: true
+            },
             {
               key: "trips",
               label: 'Trips',

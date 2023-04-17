@@ -41,7 +41,7 @@ public class FlexBookingContext: DbContext, IFlexBookingContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         //TODO: Move connection string to config
-        optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=FlexBooking; Trusted_Connection=True;Encrypt = false;");
+        optionsBuilder.UseSqlServer("Server=.;Database=FlexBooking; Trusted_Connection=True;Encrypt = false;");
         //TODO: Enable logging only in development
         optionsBuilder.EnableSensitiveDataLogging();
         optionsBuilder.EnableDetailedErrors();

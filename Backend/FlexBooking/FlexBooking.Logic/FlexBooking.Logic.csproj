@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FlexBooking.Domain\FlexBooking.Domain.csproj" />
+      <ProjectReference Include="..\FlexBooking.Database\FlexBooking.Database.csproj" />
     </ItemGroup>
 
 </Project>

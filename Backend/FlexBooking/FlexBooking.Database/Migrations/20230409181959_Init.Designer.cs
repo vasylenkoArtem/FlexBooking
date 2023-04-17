@@ -25,7 +25,7 @@ namespace FlexBooking.Domain.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.BookingOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.BookingOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace FlexBooking.Domain.Migrations
                     b.ToTable("BookingOffers");
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.CarOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.CarOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +84,7 @@ namespace FlexBooking.Domain.Migrations
                     b.ToTable("CarOffers");
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.HotelOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.HotelOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,7 +108,7 @@ namespace FlexBooking.Domain.Migrations
                     b.ToTable("HotelOffers");
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.OfferLocation", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.OfferLocation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -137,7 +137,7 @@ namespace FlexBooking.Domain.Migrations
                     b.ToTable("OfferLocations");
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.User", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -157,15 +157,15 @@ namespace FlexBooking.Domain.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FlexBooking.Domain.Models.BookingOffer", b =>
+            modelBuilder.Entity("FlexBooking.Database.Models.BookingOffer", b =>
                 {
-                    b.HasOne("FlexBooking.Domain.Models.OfferLocation", "DestinationOfferLocation")
+                    b.HasOne("FlexBooking.Database.Models.OfferLocation", "DestinationOfferLocation")
                         .WithMany()
                         .HasForeignKey("DestinationOfferLocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FlexBooking.Domain.Models.OfferLocation", "OriginOfferLocation")
+                    b.HasOne("FlexBooking.Database.Models.OfferLocation", "OriginOfferLocation")
                         .WithMany()
                         .HasForeignKey("OriginOfferLocationId")
                         .OnDelete(DeleteBehavior.Cascade)
