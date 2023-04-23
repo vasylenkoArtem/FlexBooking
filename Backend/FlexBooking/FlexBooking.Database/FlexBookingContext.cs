@@ -12,6 +12,7 @@ public interface IFlexBookingContext
     public DbSet<BookingOffer> BookingOffers { get; set; }
     public DbSet<HotelOffer> HotelOffers { get; set; }
     public DbSet<CarOffer> CarOffers { get; set; }
+    public DbSet<Booking> Bookings { get; set; }
     
     public int SaveChanges();
     public Task<int> SaveChangesAsync();
@@ -37,6 +38,7 @@ public class FlexBookingContext: DbContext, IFlexBookingContext
     public DbSet<BookingOffer> BookingOffers { get; set; }
     public DbSet<HotelOffer> HotelOffers { get; set; }
     public DbSet<CarOffer> CarOffers { get; set; }
+    public DbSet<Booking> Bookings { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
