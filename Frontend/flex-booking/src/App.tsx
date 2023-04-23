@@ -11,6 +11,7 @@ import HotelListPage from './pages/Hotel/HotelListPage';
 import BookingOffersPage from './pages/BookingOffers/BookingOffersList/BookingOffersPage';
 import BookingOfferDetailsPage from './pages/BookingOffers/BoolingOfferDetailsPage/BookingOfferDetailsPage';
 import { removeAuthDataFromSessionStorage } from './helpers/authHelper';
+import BookingPage from "./pages/Booking/BookingPage";
 
 const { Header, Content, Footer } = Layout;
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "hotels",
     element: <HotelListPage />,
+  },
+  {
+    path: "booking/:offerId",
+    element: <BookingPage />,
   },
 ]);
 

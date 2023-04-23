@@ -2,10 +2,11 @@ import {useParams} from "react-router-dom";
 import sendRequest from "../../../helpers/apiHelper";
 import {BookingOffer, OfferType} from "../BookingOffersList/types";
 import {useEffect, useState} from "react";
-import { Badge, Descriptions, Image } from 'antd';
+import {Badge, Button, Descriptions, Image} from 'antd';
 import CarRentalsList from "../../CarRentals/CarRentalsList";
 import {CarOffer, HotelOffer} from "../../../components/Services/types";
 import HotelsList from "../../Hotel/HotelsList";
+import { useNavigate } from "react-router-dom";
 
 const getVehicleTypeString = (offerTypeId: OfferType) => {
     switch (offerTypeId) {
@@ -52,6 +53,8 @@ const getDestinationString = (bookingOffer: BookingOffer | undefined) => {
 
 
 const BookingOfferDetailsPage = () => {
+    const history = useNavigate();
+    
     const [bookingOffer, setBookingOffer] = useState<BookingOffer | undefined>(undefined);
     const [carOffers, setCarOffers] = useState<CarOffer[] | undefined>(undefined);
     const [hotelOffers, setHotelOffers] = useState<HotelOffer[] | undefined>(undefined);
@@ -103,6 +106,10 @@ const BookingOfferDetailsPage = () => {
             });
     }
     
+    const onBookingClick = () => {
+        history(`/booking/${bookingOfferId}`);
+    }
+    
     if (!bookingOffer) {
         return <>Something went wrong...</>
     } else
@@ -127,7 +134,12 @@ const BookingOfferDetailsPage = () => {
                 </Descriptions.Item>
                 <Descriptions.Item label="Vehicle type" span={2}>{getVehicleTypeString(bookingOffer?.offerTypeId)}</Descriptions.Item>
                 
-                <Descriptions.Item label="Price" span={3}>${bookingOffer?.price}</Descriptions.Item>
+                <Descriptions.Item label="Price" span={2}>${bookingOffer?.price}</Descriptions.Item>
+                <Descriptions.Item label="Start Booking">
+                    <Button type="primary" size='middle' onClick={onBookingClick}>
+                        Start Booking
+                    </Button>
+                </Descriptions.Item>
             </Descriptions>
             
             <div style={{fontSize: "16px", fontWeight: "600", marginTop: "30px"}}>Car Rentals</div>
