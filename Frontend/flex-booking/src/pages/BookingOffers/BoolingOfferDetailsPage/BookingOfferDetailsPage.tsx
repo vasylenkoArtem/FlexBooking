@@ -127,58 +127,59 @@ const BookingOfferDetailsPage = () => {
 
     if (!bookingOffer) {
         return <>Something went wrong...</>
-    } else
-        return <>
-            <Descriptions title="Deal Info" bordered>
-                <Descriptions.Item label="Origin">{getOriginString(bookingOffer)}</Descriptions.Item>
-                <Descriptions.Item label="Destination">{getDestinationString(bookingOffer)}</Descriptions.Item>
-                <Descriptions.Item label="Company">
-                    <Image
-                        width={80}
-                        src={bookingOffer?.companyLogoUrl}
-                        preview={false}
-                    />
-
-                </Descriptions.Item>
-
-                <Descriptions.Item label="Departure Date">{bookingOffer?.departureDateUtc.toString()}</Descriptions.Item>
-                <Descriptions.Item label="Arrival Date" span={2}>{bookingOffer?.arrivalDateUtc.toString()}</Descriptions.Item>
-
-                <Descriptions.Item label="Availability" >
-                    <Badge status="processing" text="Available" />
-                </Descriptions.Item>
-                <Descriptions.Item label="Vehicle type" span={2}>{getVehicleTypeString(bookingOffer?.offerTypeId)}</Descriptions.Item>
-
-                <Descriptions.Item label="Price" span={2}>${bookingOffer?.price}</Descriptions.Item>
-                <Descriptions.Item label="Start Booking">
-                    <Button type="primary" size='middle' onClick={onBookingClick}>
-                        Start Booking
-                    </Button>
-                </Descriptions.Item>
-            </Descriptions>
-
-            <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Car Rentals</div>
-
-            <div
-                style={{
-                    marginTop: 30
-                }}>
-                <CarRentalsList
-                    carRentalOffers={carOffers ?? []}
+    }
+    
+    return <>
+        <Descriptions title="Deal Info" bordered>
+            <Descriptions.Item label="Origin">{getOriginString(bookingOffer)}</Descriptions.Item>
+            <Descriptions.Item label="Destination">{getDestinationString(bookingOffer)}</Descriptions.Item>
+            <Descriptions.Item label="Company">
+                <Image
+                    width={80}
+                    src={bookingOffer?.companyLogoUrl}
+                    preview={false}
                 />
-            </div>
 
-            <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Hotel Rentals</div>
+            </Descriptions.Item>
 
-            <div
-                style={{
-                    marginTop: 30
-                }}>
-                <HotelsList
-                    hotelOffers={hotelOffers ?? []}
-                />
-            </div>
-        </>
+            <Descriptions.Item label="Departure Date">{bookingOffer?.departureDateUtc.toString()}</Descriptions.Item>
+            <Descriptions.Item label="Arrival Date" span={2}>{bookingOffer?.arrivalDateUtc.toString()}</Descriptions.Item>
+
+            <Descriptions.Item label="Availability" >
+                <Badge status="processing" text="Available" />
+            </Descriptions.Item>
+            <Descriptions.Item label="Vehicle type" span={2}>{getVehicleTypeString(bookingOffer?.offerTypeId)}</Descriptions.Item>
+
+            <Descriptions.Item label="Price" span={2}>${bookingOffer?.price}</Descriptions.Item>
+            <Descriptions.Item label="Start Booking">
+                <Button type="primary" size='middle' onClick={onBookingClick}>
+                    Start Booking
+                </Button>
+            </Descriptions.Item>
+        </Descriptions>
+
+        <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Car Rentals</div>
+
+        <div
+            style={{
+                marginTop: 30
+            }}>
+            <CarRentalsList
+                carRentalOffers={carOffers ?? []}
+            />
+        </div>
+
+        <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Hotel Rentals</div>
+
+        <div
+            style={{
+                marginTop: 30
+            }}>
+            <HotelsList
+                hotelOffers={hotelOffers ?? []}
+            />
+        </div>
+    </>
 
 
 }
