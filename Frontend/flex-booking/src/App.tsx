@@ -81,11 +81,9 @@ const App: React.FC = () => {
         />
       </Header>
       <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Tickets</Breadcrumb.Item>
-          <Breadcrumb.Item>Search</Breadcrumb.Item>
-        </Breadcrumb>
+        <div style={{ margin: '25px 0' }}>
+        
+        </div>
         <div className="site-layout-content" style={{ background: colorBgContainer }}>
 
           <RouterProvider router={router} />
