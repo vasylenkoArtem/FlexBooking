@@ -21,32 +21,17 @@ enum BookingStatus {
     Completed = 3
 }
 
-const BookingOfferDetailsPage = () => {
-    const { offerId } = useParams<{ offerId: string }>()
+const BookingPage = () => {
+    const { bookingId } = useParams<{ bookingId: string }>()
 
-    const [bookingId, setBookingId] = useState<number | undefined>(undefined);
     const [booking, setBooking] = useState<Booking | undefined>(undefined);
     // const { data: offer, isIdle } = useGetOffer({ offerId })
     
     // if (isIdle) return <Spinner />
 
-    useEffect(() => {
-        // Fetch data from an API
-        console.log('offerId: ', offerId);
-        sendRequest(`/booking`, 'POST', {
-            bookingOfferId: offerId,
-            userId: getAuthDataFromSessionStorage()?.userId
-        })
-            .then((response: number) => {
-                setBookingId(response);
-            })
-            .catch((error: any) => {
-                alert(`Error has been occured during booking creation, error: ${error}`);
-            });
-    }, []);
 
+    //TODO: Request is send twice
     useEffect(() => {
-        if (!bookingId) return;
         // Fetch data from an API
         sendRequest(`/booking/${bookingId}`, 'GET')
             .then((response: Booking) => {
@@ -55,7 +40,7 @@ const BookingOfferDetailsPage = () => {
             .catch((error: any) => {
                 alert(`Error has been occured during getting of booking, error: ${error}`);
             });
-    }, [bookingId]);
+    }, []);
 
     return (
         <div>
@@ -95,4 +80,4 @@ const BookingOfferDetailsPage = () => {
     );
 }
     
-export default BookingOfferDetailsPage
+export default BookingPage

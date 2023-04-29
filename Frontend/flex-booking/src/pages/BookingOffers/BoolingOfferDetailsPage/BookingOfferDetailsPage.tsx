@@ -1,12 +1,13 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import sendRequest from "../../../helpers/apiHelper";
-import {BookingOffer, OfferType} from "../BookingOffersList/types";
-import {useEffect, useState} from "react";
-import {Badge, Button, Descriptions, Image} from 'antd';
+import { BookingOffer, OfferType } from "../BookingOffersList/types";
+import { useEffect, useState } from "react";
+import { Badge, Button, Descriptions, Image } from 'antd';
 import CarRentalsList from "../../CarRentals/CarRentalsList";
-import {CarOffer, HotelOffer} from "../../../components/Services/types";
+import { CarOffer, HotelOffer } from "../../../components/Services/types";
 import HotelsList from "../../Hotel/HotelsList";
 import { useNavigate } from "react-router-dom";
+import { getAuthDataFromSessionStorage } from "../../../helpers/authHelper";
 
 const getVehicleTypeString = (offerTypeId: OfferType) => {
     switch (offerTypeId) {
@@ -54,13 +55,13 @@ const getDestinationString = (bookingOffer: BookingOffer | undefined) => {
 
 const BookingOfferDetailsPage = () => {
     const history = useNavigate();
-    
+
     const [bookingOffer, setBookingOffer] = useState<BookingOffer | undefined>(undefined);
     const [carOffers, setCarOffers] = useState<CarOffer[] | undefined>(undefined);
     const [hotelOffers, setHotelOffers] = useState<HotelOffer[] | undefined>(undefined);
 
-    const bookingOfferId = useParams().tripId;    
-    
+    const bookingOfferId = useParams().tripId;
+
     useEffect(() => {
         getBookingOffer();
     }, []);
@@ -105,11 +106,25 @@ const BookingOfferDetailsPage = () => {
                 alert(`Error has been occured during get hotel offers, error: ${error}`);
             });
     }
-    
+
     const onBookingClick = () => {
-        history(`/booking/${bookingOfferId}`);
+        createBooking();
     }
-    
+
+    const createBooking = () => {
+        // Fetch data from an API
+        sendRequest(`/booking`, 'POST', {
+            bookingOfferId: bookingOfferId,
+            userId: getAuthDataFromSessionStorage()?.userId
+        })
+            .then((bookingId: number) => {
+                history(`/booking/${bookingId}`);
+            })
+            .catch((error: any) => {
+                alert(`Error has been occured during booking creation, error: ${error}`);
+            });
+    }
+
     if (!bookingOffer) {
         return <>Something went wrong...</>
     } else
@@ -123,17 +138,17 @@ const BookingOfferDetailsPage = () => {
                         src={bookingOffer?.companyLogoUrl}
                         preview={false}
                     />
-                    
+
                 </Descriptions.Item>
-                
+
                 <Descriptions.Item label="Departure Date">{bookingOffer?.departureDateUtc.toString()}</Descriptions.Item>
                 <Descriptions.Item label="Arrival Date" span={2}>{bookingOffer?.arrivalDateUtc.toString()}</Descriptions.Item>
-                
+
                 <Descriptions.Item label="Availability" >
                     <Badge status="processing" text="Available" />
                 </Descriptions.Item>
                 <Descriptions.Item label="Vehicle type" span={2}>{getVehicleTypeString(bookingOffer?.offerTypeId)}</Descriptions.Item>
-                
+
                 <Descriptions.Item label="Price" span={2}>${bookingOffer?.price}</Descriptions.Item>
                 <Descriptions.Item label="Start Booking">
                     <Button type="primary" size='middle' onClick={onBookingClick}>
@@ -141,9 +156,9 @@ const BookingOfferDetailsPage = () => {
                     </Button>
                 </Descriptions.Item>
             </Descriptions>
-            
-            <div style={{fontSize: "16px", fontWeight: "600", marginTop: "30px"}}>Car Rentals</div>
-            
+
+            <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Car Rentals</div>
+
             <div
                 style={{
                     marginTop: 30
@@ -153,8 +168,8 @@ const BookingOfferDetailsPage = () => {
                 />
             </div>
 
-            <div style={{fontSize: "16px", fontWeight: "600", marginTop: "30px"}}>Hotel Rentals</div>
-            
+            <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Hotel Rentals</div>
+
             <div
                 style={{
                     marginTop: 30
@@ -164,8 +179,8 @@ const BookingOfferDetailsPage = () => {
                 />
             </div>
         </>
-    
-    
+
+
 }
 
 export default BookingOfferDetailsPage;
