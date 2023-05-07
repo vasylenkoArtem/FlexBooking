@@ -1,4 +1,5 @@
 ﻿using FlexBooking.Logic.Aggregates.Booking.Commands;
+using FlexBooking.Logic.Aggregates.Booking.Models;
 using FlexBooking.Logic.Aggregates.Booking.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -41,16 +42,19 @@ public class BookingController: ControllerBase
     }
     
     [HttpPut("{bookingId:int}")]
-    public IActionResult UpdateBooking(int bookingId)
+    public async Task<IActionResult> UpdateBooking(int bookingId, [FromBody] BookingViewModel viewModel,
+        [FromServices] IMediator mediator)
     {
-        // Mark as updated and update
-        return Ok();
-    }
-    
-    [HttpDelete("{bookingId:int}")]
-    public IActionResult DeleteBooking(int bookingId)
-    {
-        // Mark as deleted
-        return Ok();
+        try
+        {
+            var query = new UpdateBookingCommand(bookingId, viewModel);
+            var booking = await mediator.Send(query);
+            return Ok(booking);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return BadRequest();
+        }
     }
 }

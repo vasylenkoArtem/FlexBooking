@@ -1,4 +1,5 @@
 ﻿using FlexBooking.Domain.Enums;
+using Newtonsoft.Json;
 
 namespace FlexBooking.Logic.Aggregates.Booking.Models;
 
@@ -15,6 +16,25 @@ public class BookingViewModel
     public string? Comment { get; set; }
     public BookingStatusEnum Status { get; set; }
 
+    public BookingViewModel()
+    {
+    }
+
+    [JsonConstructor]
+    public BookingViewModel(string passportFullName, string passportNumber, string visaNumber, string email, 
+        string phone, int bookingOfferId, int? passengerSeats, float? price, string comment, BookingStatusEnum status)
+    {
+        PassportFullName = passportFullName;
+        PassportNumber = passportNumber;
+        VisaNumber = visaNumber;
+        Email = email;
+        Phone = phone;
+        BookingOfferId = bookingOfferId;
+        PassengerSeats = passengerSeats;
+        Price = price;
+        Comment = comment;
+        Status = status;
+    }
 
     public BookingViewModel(Domain.Models.Booking booking)
     {

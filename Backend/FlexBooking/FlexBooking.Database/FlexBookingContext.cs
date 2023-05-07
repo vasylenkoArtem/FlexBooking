@@ -15,7 +15,7 @@ public interface IFlexBookingContext
     public DbSet<Booking> Bookings { get; set; }
     
     public int SaveChanges();
-    public Task<int> SaveChangesAsync();
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     public DbSet<TEntity> Set<TEntity>() where TEntity : class;
     public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 }
@@ -61,9 +61,9 @@ public class FlexBookingContext: DbContext, IFlexBookingContext
         return base.SaveChanges();
     }
     
-    public Task<int> SaveChangesAsync()
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return base.SaveChangesAsync();
+        return base.SaveChangesAsync(cancellationToken);
     }
 
     public DbSet<TEntity> Set<TEntity>() where TEntity : class

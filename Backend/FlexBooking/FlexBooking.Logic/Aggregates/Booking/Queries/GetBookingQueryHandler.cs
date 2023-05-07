@@ -20,8 +20,11 @@ public class GetBookingQueryHandler : IRequestHandler<GetBookingQuery, BookingVi
             .Include(x => x.BookingOffer)
             .Include(x => x.CarOffers)
             .Include(x => x.HotelOffers)
+            .Include(x => x.User)
             .FirstOrDefaultAsync(x => x.Id == request.BookingId, cancellationToken: cancellationToken);
 
-        return new BookingViewModel(booking);
+        var result = new BookingViewModel(booking);
+        
+        return result;
     }
 }
