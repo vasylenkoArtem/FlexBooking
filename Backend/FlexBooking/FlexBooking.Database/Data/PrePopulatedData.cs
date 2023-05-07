@@ -11,8 +11,8 @@ public static class PrePopulatedData
         // BookingOffers
         modelBuilder.Entity<User>().HasData(new List<User>()
         {
-            new() { Id = 1, Username = "TestClient", Password = "123456", RoleId = UserRoles.Client },
-            new() { Id = 2, Username = "TestAdmin", Password = "123456", RoleId = UserRoles.Admin }
+            new() { Id = 1, Username = "TestClient", Password = "123456", RoleId = UserRoles.Client, Phone = "+1999999999", Email = "test@i.ua"},
+            new() { Id = 2, Username = "TestAdmin", Password = "123456", RoleId = UserRoles.Admin, Phone = "+1999999999", Email = "test@i.ua" }
         });
 
         modelBuilder.Entity<OfferLocation>().HasData(new List<OfferLocation>()

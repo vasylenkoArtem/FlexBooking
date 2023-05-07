@@ -8,7 +8,9 @@ public class Booking
     [Key]
     public int Id { get; set; }
     public int UserId { get; set; }
-    public string? UserFullName { get; set; }
+    public string? PassportFullName { get; set; }
+    public string? PassportNumber { get; set; }
+    public string? VisaNumber { get; set; }
     public int BookingOfferId { get; set; }
     public int? PassengerSeats { get; set; }
     public float? Price { get; set; }
