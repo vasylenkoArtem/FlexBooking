@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { DatePicker, Form, Input } from "antd";
 
 const Payment = () => {
     return <>
@@ -21,8 +21,9 @@ const Payment = () => {
             name="expiryDate"
             rules={[{ required: true, message: 'Please input expiry date' }]}
         >
-            <Input />
+            <DatePicker />
         </Form.Item>
+        
         <Form.Item
             label="Billing Address"
             name="billingAddress"
