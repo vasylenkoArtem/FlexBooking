@@ -1,20 +1,21 @@
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { StepProps, Steps } from "antd";
+import React, { FormEvent, useEffect, useState } from "react";
+import { Button, Form, StepProps, Steps } from "antd";
 import { LoadingOutlined, SketchOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from "@ant-design/icons";
 import sendRequest from "../../../helpers/apiHelper";
-import PassengerInformation from "./WizardSteps/PassengerInformation";
-import AdditionalServices from "./WizardSteps/AdditionalServices";
-import Payment from "./WizardSteps/Payment";
-import DownloadTicket from "./WizardSteps/DownloadTicket";
+import PassengerInformationFormItems from "./WizardSteps/PassengerInformationFormItems";
+import AdditionalServicesFormItems from "./WizardSteps/AdditionalServicesFormItems";
+import PaymentFormItems from "./WizardSteps/PaymentFormItems";
+import DownloadTicketFormItems from "./WizardSteps/DownloadTicketFormItems";
 
-interface Booking {
+export interface Booking {
     userFullName: string;
     bookingOfferId: number;
     passengerSeats: number;
     price: number;
     comment: string;
     status: BookingStatus;
+    destinationCity: string;
 }
 
 enum BookingStatus {
@@ -29,6 +30,9 @@ const BookingWizard = () => {
 
     const [booking, setBooking] = useState<Booking | undefined>(undefined);
     const [currentStep, setCurrentStep] = useState(0);
+
+    const [formValues, setFormValues] = useState({});
+
     // const { data: offer, isIdle } = useGetOffer({ offerId })
 
     // if (isIdle) return <Spinner />
@@ -47,13 +51,30 @@ const BookingWizard = () => {
     }, []);
 
     const onChangeStep = (value: number) => {
-        console.log(value)
         setCurrentStep(value);
     };
 
     const userInformationStatus = (stepId: number) => {
-        return currentStep >= stepId ? 'finish' : 'wait'; 
+        return currentStep >= stepId ? 'finish' : 'wait';
     }
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    // const addBookingOffer = (bookingOfferDto: BookingOfferDto) => {
+    //     setIsLoading(true)
+
+    //     sendRequest(`/booking-offers`, 'POST', bookingOfferDto)
+    //         .then((response: any) => {
+    //             setIsModalOpen(false);
+    //             setIsLoading(false)
+    //             window.location.reload();
+    //         })
+    //         .catch((error: any) => {
+    //             alert(`Error has been occured during adding booking offers, error: ${error}`);
+    //             setIsLoading(false)
+    //         });
+    // }
 
     const stepItems: StepProps[] = [
         {
@@ -82,6 +103,19 @@ const BookingWizard = () => {
     if (!booking) {
         return <div>Loading...</div>;
     }
+
+    const onValuesChange = (changedValues: any) => {
+        setFormValues({
+            ...formValues,
+            ...changedValues
+        });
+    }
+
+    //Called when form validation is successfull so next step can be excecuted
+    const onFormSubmit = () => {
+        setCurrentStep(currentStep + 1);
+    }
+
     return <>
 
         <Steps
@@ -90,25 +124,58 @@ const BookingWizard = () => {
             onChange={onChangeStep}
         />
 
-        {
-            currentStep === 0 && 
-            <PassengerInformation />
-        }
-        {
-            currentStep === 1 &&  
-            <AdditionalServices />
-        }
-        {
-            currentStep === 2 &&  
-            <Payment />
-        }
-        {
-            currentStep === 3 &&     
-            <DownloadTicket />
-        }
+        <div
+            style={{
+                margin: 30
+            }}
+        >
+            {
+                currentStep === 1 &&
+                <AdditionalServicesFormItems booking={booking} />
+            }
+            <Form
+                name="basic"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                style={{ maxWidth: 600 }}
+                initialValues={{ remember: true }}
+                autoComplete="off"
+                onValuesChange={onValuesChange}
+                onFinish={onFormSubmit}
+            >
 
+                {
+                    currentStep === 0 &&
+                    <PassengerInformationFormItems />
+                }
+                {
+                    currentStep === 2 &&
+                    <PaymentFormItems />
+                }
+                {
+                    currentStep === 3 &&
+                    <DownloadTicketFormItems />
+                }
 
+                <Form.Item>
+                    <div style={{ margin: 10 }}>
+                        <Button
+                            type="default" loading={isLoading} style={{ marginRight: 10 }}
+                            onClick={() => setCurrentStep(currentStep - 1)}
+                        >
+                            Previous
+                        </Button>
 
+                        {
+                            currentStep !== 3 &&
+                            <Button type="primary" htmlType="submit" loading={isLoading}>
+                                Next
+                            </Button>
+                        }
+                    </div>
+                </Form.Item>
+            </Form>
+        </div>
     </>;
 }
 

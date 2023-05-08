@@ -5,6 +5,7 @@ import ServiceShortView from "../../components/Services/ServiceShortView";
 
 interface PassedProps {
     carRentalOffers: CarOffer[]
+    actionString?: string;
 }
 
 const CarRentalsList = (props: PassedProps) => {
@@ -26,7 +27,7 @@ const CarRentalsList = (props: PassedProps) => {
                     }
                 }>
                     <ServiceShortView
-                        service={offer} imageUrl={offer.carImageUrl} />
+                        service={offer} imageUrl={offer.carImageUrl} actionString={props.actionString} />
                 </div>
             })}
         </div>
