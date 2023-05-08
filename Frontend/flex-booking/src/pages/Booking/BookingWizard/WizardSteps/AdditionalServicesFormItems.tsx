@@ -48,6 +48,7 @@ const AdditionalServicesFormItems = (props: PassedProps) => {
 
     return <>
 
+        <h1>Services in {props.booking.destinationCity}</h1>
         <CarRentalsList
             carRentalOffers={carOffers ?? []}
             actionString="SELECT"
