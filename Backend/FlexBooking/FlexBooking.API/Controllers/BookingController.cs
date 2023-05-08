@@ -42,7 +42,7 @@ public class BookingController: ControllerBase
     }
     
     [HttpPut("{bookingId:int}")]
-    public async Task<IActionResult> UpdateBooking(int bookingId, [FromBody] BookingViewModel viewModel,
+    public async Task<IActionResult> UpdateBooking(int bookingId, [FromBody] UpdateBookingViewModel viewModel,
         [FromServices] IMediator mediator)
     {
         try

@@ -18,6 +18,7 @@ public class GetBookingQueryHandler : IRequestHandler<GetBookingQuery, BookingVi
     {
         var booking = await _context.Bookings
             .Include(x => x.BookingOffer)
+            .ThenInclude(x => x.DestinationOfferLocation)
             .Include(x => x.CarOffers)
             .Include(x => x.HotelOffers)
             .Include(x => x.User)

@@ -16,6 +16,8 @@ public class BookingViewModel
     public string? Comment { get; set; }
     public BookingStatusEnum Status { get; set; }
 
+    public string DestinationCity { get; set; }
+
     public BookingViewModel()
     {
     }
@@ -48,5 +50,6 @@ public class BookingViewModel
         Price = booking.Price;
         Comment = booking.Comment;
         Status = booking.Status;
+        DestinationCity = booking.BookingOffer.DestinationOfferLocation.City;
     }
 }

@@ -58,23 +58,20 @@ const BookingWizard = () => {
         return currentStep >= stepId ? 'finish' : 'wait';
     }
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    // const addBookingOffer = (bookingOfferDto: BookingOfferDto) => {
-    //     setIsLoading(true)
+    const updateBooking = (bookingDto: Booking) => {
+        setIsLoading(true)
 
-    //     sendRequest(`/booking-offers`, 'POST', bookingOfferDto)
-    //         .then((response: any) => {
-    //             setIsModalOpen(false);
-    //             setIsLoading(false)
-    //             window.location.reload();
-    //         })
-    //         .catch((error: any) => {
-    //             alert(`Error has been occured during adding booking offers, error: ${error}`);
-    //             setIsLoading(false)
-    //         });
-    // }
+        sendRequest(`/booking/${bookingId}`, 'PUT', booking)
+            .then((response: any) => {
+                setIsLoading(false)
+            })
+            .catch((error: any) => {
+                alert(`Error has been occured during updating booking, error: ${error}`);
+                setIsLoading(false)
+            });
+    }
 
     const stepItems: StepProps[] = [
         {
@@ -114,6 +111,7 @@ const BookingWizard = () => {
     //Called when form validation is successfull so next step can be excecuted
     const onFormSubmit = () => {
         setCurrentStep(currentStep + 1);
+        updateBooking(formValues as Booking);
     }
 
     return <>
