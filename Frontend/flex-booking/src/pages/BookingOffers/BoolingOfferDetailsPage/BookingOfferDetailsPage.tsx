@@ -166,6 +166,7 @@ const BookingOfferDetailsPage = () => {
             }}>
             <CarRentalsList
                 carRentalOffers={carOffers ?? []}
+                isActionDisabled
             />
         </div>
 
@@ -177,6 +178,7 @@ const BookingOfferDetailsPage = () => {
             }}>
             <HotelsList
                 hotelOffers={hotelOffers ?? []}
+                isActionDisabled
             />
         </div>
     </>

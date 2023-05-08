@@ -44,6 +44,7 @@ const HotelsListPage = () => {
             }}>
             <HotelsList
                 hotelOffers={hotelOffers ?? []}
+                isActionDisabled
             />
         </div>
 

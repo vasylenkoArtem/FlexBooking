@@ -2,7 +2,7 @@ import { Button } from "antd";
 
 const DownloadTicket = () => {
     return <>
-        <Button>Download Ticket</Button>
+        <Button disabled>Download Ticket</Button>
     </>
 }
 

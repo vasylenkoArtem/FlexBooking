@@ -51,10 +51,12 @@ const AdditionalServicesFormItems = (props: PassedProps) => {
         <CarRentalsList
             carRentalOffers={carOffers ?? []}
             actionString="SELECT"
+            isActionDisabled={true}
         />
         <HotelsList
             hotelOffers={hotelOffers ?? []}
             actionString="SELECT"
+            isActionDisabled={true}
         />
 
     </>

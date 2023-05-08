@@ -6,6 +6,7 @@ import ServiceShortView from "../../components/Services/ServiceShortView";
 interface PassedProps {
     hotelOffers: HotelOffer[],
     actionString?: string;
+    isActionDisabled?: boolean;
 }
 
 const HotelsList = (props: PassedProps) => {
@@ -27,7 +28,11 @@ const HotelsList = (props: PassedProps) => {
                     }
                 }>
                     <ServiceShortView
-                        service={offer} imageUrl={offer.hotelRoomImageUrl} actionString={props.actionString} />
+                        service={offer}
+                        imageUrl={offer.hotelRoomImageUrl}
+                        actionString={props.actionString}
+                        isActionDisabled={props.isActionDisabled}
+                    />
                 </div>
             })}
         </div>

@@ -6,6 +6,7 @@ interface PassedProps {
     service: Service;
     imageUrl: string;
     actionString?: string;
+    isActionDisabled?: boolean;
 }
 
 const ServiceShortView = (props: PassedProps) => {
@@ -31,7 +32,12 @@ const ServiceShortView = (props: PassedProps) => {
                 </Col>
                 <Col span={6} style={{ textAlign: 'center' }}>
                     <h1>${props.service.price}</h1>
-                    <Button onClick={() => window.open(`trips/${props.service.id}`, '_blank')}>{props.actionString ?? 'SEE DEAL'}</Button>
+                    <Button
+                        onClick={() => window.open(`trips/${props.service.id}`, '_blank')}
+                        disabled={props.isActionDisabled}
+                    >
+                        {props.actionString ?? 'SEE DEAL'}
+                    </Button>
                 </Col>
             </Row>
         </Card>

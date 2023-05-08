@@ -44,6 +44,7 @@ const CarRentalsListPage = () => {
             }}>
             <CarRentalsList
                 carRentalOffers={carOffers ?? []}
+                isActionDisabled
             />
         </div>
 
