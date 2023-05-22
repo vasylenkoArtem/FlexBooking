@@ -222,26 +222,34 @@ const AddBookingOfferForm = () => {
             onCancel={handleLocationModalCancelCancel}
             onOk={() => addOfferLocation(offerLocation as OfferLocation)}
         >
-            <Form.Item
-                label="City"
+            <Form
+                name="basic"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                style={{ maxWidth: 600 }}
+                autoComplete="off"
             >
-                <Input onChange={(x: any) => onOfferLocationChange('city', x.target.value)} />
-            </Form.Item>
-            <Form.Item
-                label="Airport code"
-            >
-                <Input onChange={(x: any) => onOfferLocationChange('airportCode', x.target.value)} />
-            </Form.Item>
-            <Form.Item
-                label="Train station"
-            >
-                <Input onChange={(x: any) => onOfferLocationChange('trainStation', x.target.value)} />
-            </Form.Item>
-            <Form.Item
-                label="Bus station"
-            >
-                <Input onChange={(x: any) => onOfferLocationChange('busStation', x.target.value)} />
-            </Form.Item>
+                <Form.Item
+                    label="City"
+                >
+                    <Input onChange={(x: any) => onOfferLocationChange('city', x.target.value)} />
+                </Form.Item>
+                <Form.Item
+                    label="Airport code"
+                >
+                    <Input onChange={(x: any) => onOfferLocationChange('airportCode', x.target.value)} />
+                </Form.Item>
+                <Form.Item
+                    label="Train station"
+                >
+                    <Input onChange={(x: any) => onOfferLocationChange('trainStation', x.target.value)} />
+                </Form.Item>
+                <Form.Item
+                    label="Bus station"
+                >
+                    <Input onChange={(x: any) => onOfferLocationChange('busStation', x.target.value)} />
+                </Form.Item>
+            </Form>
         </Modal>
     </>
 }
