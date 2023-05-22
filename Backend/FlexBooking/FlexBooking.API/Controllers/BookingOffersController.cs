@@ -1,5 +1,7 @@
-﻿using FlexBooking.Logic.Aggregates.BookingOffer.Commands;
+﻿using FlexBooking.API.Requests;
+using FlexBooking.Logic.Aggregates.BookingOffer.Commands;
 using FlexBooking.Logic.Aggregates.BookingOffer.Dto;
+using FlexBooking.Logic.Aggregates.OfferLocation;
 using FlexBooking.Logic.DTOs;
 using FlexBooking.Logic.Queries;
 using MediatR;
@@ -37,11 +39,30 @@ public class BookingOffers : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddBookingOffer([FromBody] BookingOfferDto dto, [FromServices] IMediator mediator)
+    public async Task<IActionResult> AddBookingOffer([FromBody] AddBookingOfferRequest request,
+        [FromServices] IMediator mediator)
     {
         try
         {
-            var query = new AddBookingOfferCommand() { BookingOffer = dto };
+            if (request.NewOriginLocation != null)
+            {
+                var addOriginLocationCommand = new AddOfferLocationCommand()
+                    { OfferLocation = request.NewOriginLocation };
+                var originLocationId = await mediator.Send(addOriginLocationCommand);
+
+                request.BookingOffer.OriginId = originLocationId;
+            }
+
+            if (request.NewDestinationLocation != null)
+            {
+                var addDestinationLocationCommand = new AddOfferLocationCommand()
+                    { OfferLocation = request.NewDestinationLocation };
+                var destinationLocationId = await mediator.Send(addDestinationLocationCommand);
+
+                request.BookingOffer.DestinationId = destinationLocationId;
+            }
+
+            var query = new AddBookingOfferCommand() { BookingOffer = request.BookingOffer };
             var result = await mediator.Send(query);
             return Ok(result);
         }

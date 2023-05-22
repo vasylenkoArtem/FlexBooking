@@ -1,12 +1,32 @@
 import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Modal, Select } from "antd";
-import { useState } from "react";
-import { BookingOfferDto } from "./types";
+import { useEffect, useState } from "react";
+import { BookingOfferDto, OfferLocation } from "./types";
 import sendRequest from "../../../../helpers/apiHelper";
 
 const AddBookingOfferForm = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [offerLocations, setOfferLocations] = useState<OfferLocation[] | undefined>([]);
+
+    useEffect(() => {
+        getOfferLocations();
+    }, []);
+
+    const getOfferLocations = () => {
+        setIsLoading(true)
+
+        sendRequest(`/offer-locations`, 'GET')
+            .then((response: any) => {
+                setOfferLocations(response);
+                setIsLoading(false)
+            })
+            .catch((error: any) => {
+                alert(`Error has been occured during get offer locations, error: ${error}`);
+                setIsLoading(false)
+            });
+    }
+
 
     const onFinish = (values: any) => {
         addBookingOffer(values as BookingOfferDto);
@@ -37,6 +57,22 @@ const AddBookingOfferForm = () => {
                 alert(`Error has been occured during adding booking offers, error: ${error}`);
                 setIsLoading(false)
             });
+    }
+
+    const getOfferLocationString = (offerLocation: OfferLocation) => {
+        if (offerLocation.airportCode != undefined) {
+            return `${offerLocation.city}, ${offerLocation.airportCode}, Airport`;
+        }
+
+        if (offerLocation.busStation != undefined) {
+            return `${offerLocation.city}, ${offerLocation.busStation}, Bus Station`;
+        }
+
+        if (offerLocation.trainStation != undefined) {
+            return `${offerLocation.city}, ${offerLocation.trainStation}, Train Station`;
+        }
+
+        return 'unknown';
     }
 
     return <>
@@ -77,12 +113,7 @@ const AddBookingOfferForm = () => {
                     rules={[{ required: true, message: 'Please select origin' }]}
                 >
                     <Select>
-                        <Select.Option value="1">Toronto, YYZ Airport</Select.Option>
-                        <Select.Option value="3">Toronto, Union Train Station</Select.Option>
-                        <Select.Option value="5">Toronto, Toronto Bus Station</Select.Option>
-                        <Select.Option value="2">Montreal, YUL Airport</Select.Option>
-                        <Select.Option value="4">Montreal, Central Train Station</Select.Option>
-                        <Select.Option value="6">Montreal, Montreal Bus Station</Select.Option>
+                        {offerLocations?.map(x => <Select.Option value={x.id}>{getOfferLocationString(x)}</Select.Option>)}
                     </Select>
                 </Form.Item>
                 <Form.Item
@@ -91,12 +122,7 @@ const AddBookingOfferForm = () => {
                     rules={[{ required: true, message: 'Please select destination' }]}
                 >
                     <Select>
-                        <Select.Option value="1">Toronto, YYZ Airport</Select.Option>
-                        <Select.Option value="3">Toronto, Union Train Station</Select.Option>
-                        <Select.Option value="5">Toronto, Toronto Bus Station</Select.Option>
-                        <Select.Option value="2">Montreal, YUL Airport</Select.Option>
-                        <Select.Option value="4">Montreal, Central Train Station</Select.Option>
-                        <Select.Option value="6">Montreal, Montreal Bus Station</Select.Option>
+                        {offerLocations?.map(x => <Select.Option value={x.id}>{getOfferLocationString(x)}</Select.Option>)}
                     </Select>
                 </Form.Item>
 

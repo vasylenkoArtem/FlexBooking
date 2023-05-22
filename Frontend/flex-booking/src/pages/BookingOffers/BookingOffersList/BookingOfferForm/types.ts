@@ -8,3 +8,11 @@ export type BookingOfferDto = {
     originId: number;
     price: number;
 }
+
+export type OfferLocation = {
+    id: number;
+    city: string;
+    airportCode: string;
+    trainStation: string;
+    busStation: string;
+}
