@@ -6,12 +6,14 @@ import sendRequest from "../../../../helpers/apiHelper";
 const AddBookingOfferForm = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [offerLocations, setOfferLocations] = useState<OfferLocation[] | undefined>([]);
+    const [offerLocations, setOfferLocations] = useState<OfferLocation[]>([]);
+    const [offerLocation, setOfferLocation] = useState<OfferLocation | undefined>(undefined);
 
     useEffect(() => {
         getOfferLocations();
-    }, []);
+    }, [isModalOpen]);
 
     const getOfferLocations = () => {
         setIsLoading(true)
@@ -44,6 +46,12 @@ const AddBookingOfferForm = () => {
         setIsModalOpen(false);
     };
 
+    const handleLocationModalCancelCancel = () => {
+        setIsLocationModalOpen(false);
+
+        setOfferLocation(undefined);
+    };
+
     const addBookingOffer = (bookingOfferDto: BookingOfferDto) => {
         setIsLoading(true)
 
@@ -59,20 +67,50 @@ const AddBookingOfferForm = () => {
             });
     }
 
-    const getOfferLocationString = (offerLocation: OfferLocation) => {
-        if (offerLocation.airportCode != undefined) {
-            return `${offerLocation.city}, ${offerLocation.airportCode}, Airport`;
+    const addOfferLocation = (offerLocation: OfferLocation) => {
+        setIsLoading(true)
+
+        sendRequest(`/offer-locations`, 'POST', offerLocation)
+            .then((response: any) => {
+                setIsLocationModalOpen(false);
+                setIsLoading(false)
+                setOfferLocation(undefined);
+
+                getOfferLocations();
+            })
+            .catch((error: any) => {
+                alert(`Error has been occured during adding offer location, error: ${error}`);
+                setIsLoading(false)
+            });
+    }
+
+    const getOfferLocationString = (location: OfferLocation) => {
+        if (location.airportCode != undefined) {
+            return `${location.city}, ${location.airportCode}, Airport`;
         }
 
-        if (offerLocation.busStation != undefined) {
-            return `${offerLocation.city}, ${offerLocation.busStation}, Bus Station`;
+        if (location.busStation != undefined) {
+            return `${location.city}, ${location.busStation}, Bus Station`;
         }
 
-        if (offerLocation.trainStation != undefined) {
-            return `${offerLocation.city}, ${offerLocation.trainStation}, Train Station`;
+        if (location.trainStation != undefined) {
+            return `${location.city}, ${location.trainStation}, Train Station`;
         }
 
         return 'unknown';
+    }
+
+    const showAddLocationForm = () => {
+        setIsLocationModalOpen(true);
+    }
+
+    const onOfferLocationChange = (key: keyof (OfferLocation), value: any) => {
+        setOfferLocation(
+            {
+                ...offerLocation,
+                [key]: value
+            } as OfferLocation
+        )
     }
 
     return <>
@@ -113,19 +151,20 @@ const AddBookingOfferForm = () => {
                     rules={[{ required: true, message: 'Please select origin' }]}
                 >
                     <Select>
-                        {offerLocations?.map(x => <Select.Option value={x.id}>{getOfferLocationString(x)}</Select.Option>)}
+                        {offerLocations?.map(x => <Select.Option value={x.id.toString()}>{getOfferLocationString(x)}</Select.Option>)}
                     </Select>
                 </Form.Item>
+                <a style={{textAlign: 'right'}} onClick={showAddLocationForm}>Can't find location? Add new</a>
                 <Form.Item
                     label="Destination"
                     name="destinationId"
                     rules={[{ required: true, message: 'Please select destination' }]}
                 >
                     <Select>
-                        {offerLocations?.map(x => <Select.Option value={x.id}>{getOfferLocationString(x)}</Select.Option>)}
+                        {offerLocations?.map(x => <Select.Option value={x.id.toString()}>{getOfferLocationString(x)}</Select.Option>)}
                     </Select>
                 </Form.Item>
-
+                <a onClick={showAddLocationForm}>Can't find location? Add new</a>
                 <Form.Item
                     label="Company Logo URL"
                     name="companyLogoUrl"
@@ -172,6 +211,34 @@ const AddBookingOfferForm = () => {
                     </Button>
                 </Form.Item>
             </Form>
+        </Modal>
+
+        <Modal
+            title="Add Location"
+            open={isLocationModalOpen}
+            onCancel={handleLocationModalCancelCancel}
+            onOk={() => addOfferLocation(offerLocation as OfferLocation)}
+        >
+            <Form.Item
+                label="City"
+            >
+                <Input onChange={(x: any) => onOfferLocationChange('city', x.target.value)} />
+            </Form.Item>
+            <Form.Item
+                label="Airport code"
+            >
+                <Input onChange={(x: any) => onOfferLocationChange('airportCode', x.target.value)} />
+            </Form.Item>
+            <Form.Item
+                label="Train station"
+            >
+                <Input onChange={(x: any) => onOfferLocationChange('trainStation', x.target.value)} />
+            </Form.Item>
+            <Form.Item
+                label="Bus station"
+            >
+                <Input onChange={(x: any) => onOfferLocationChange('busStation', x.target.value)} />
+            </Form.Item>
         </Modal>
     </>
 }

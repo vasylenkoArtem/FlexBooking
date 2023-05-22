@@ -1,4 +1,5 @@
-﻿using FlexBooking.Logic.Aggregates.OfferLocation.Queries;
+﻿using FlexBooking.Logic.Aggregates.OfferLocation;
+using FlexBooking.Logic.Aggregates.OfferLocation.Queries;
 using FlexBooking.Logic.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,24 @@ public class OfferLocationsController : ControllerBase
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddOfferLocation([FromBody] OfferLocationDto dto,
+        [FromServices] IMediator mediator)
+    {
+        try
+        {
+            var command = new AddOfferLocationCommand()
+                { OfferLocation = dto };
+            var locationId = await mediator.Send(command);
+
+            return Ok(locationId);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 }
