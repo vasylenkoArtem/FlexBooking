@@ -1,16 +1,13 @@
 import React from 'react';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { BankOutlined, CarOutlined, LogoutOutlined, RocketOutlined } from '@ant-design/icons';
+import {Layout, Menu, theme} from 'antd';
+import {BankOutlined, CarOutlined, LogoutOutlined, RocketOutlined, UserOutlined} from '@ant-design/icons';
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import CarRentalsListPage from './pages/CarRentals/CarRentalsListPage';
 import HotelListPage from './pages/Hotel/HotelListPage';
 import BookingOffersPage from './pages/BookingOffers/BookingOffersList/BookingOffersPage';
 import BookingOfferDetailsPage from './pages/BookingOffers/BoolingOfferDetailsPage/BookingOfferDetailsPage';
-import { removeAuthDataFromSessionStorage } from './helpers/authHelper';
+import {isAdminUser, removeAuthDataFromSessionStorage, UserRoleLabel} from './helpers/authHelper';
 import BookingPage from "./pages/Booking/BookingPage";
 
 const { Header, Content, Footer } = Layout;
@@ -55,30 +52,27 @@ const App: React.FC = () => {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
-          items={[
-            {
-              key: "logout",
-              label: 'Logout',
-              icon:   <a href="" onClick={() =>  removeAuthDataFromSessionStorage()}><LogoutOutlined /></a>,
-              danger: true
-            },
-            {
-              key: "trips",
-              label: 'Trips',
-              icon:   <a href={`/trips`}><RocketOutlined /></a>
-            },
-            {
-              key: "hotels",
-              label: 'Hotels',
-              icon:   <a href={`/hotels`}><BankOutlined /></a>
-            },
-            {
-              key: "car rentals",
-              label: 'Car Rentals',
-              icon:   <a href={`/car-rentals`}><CarOutlined /></a>
-            }
-          ]}
-        />
+        >
+          <Menu.Item key="trips" icon={<RocketOutlined />}>
+            <a href={`/trips`}>Trips</a>
+          </Menu.Item>
+          <Menu.Item key="hotels" icon={<BankOutlined />}>
+            <a href={`/hotels`}>Hotels</a>
+          </Menu.Item>
+          <Menu.Item key="car-rentals" icon={<CarOutlined />}>
+            <a href={`/car-rentals`}>Car Rentals</a>
+          </Menu.Item>
+          <Menu.Item key="profile" style={{marginLeft: "auto"}} icon={<UserOutlined />}>
+            {isAdminUser() ? UserRoleLabel.Admin : UserRoleLabel.Client}
+          </Menu.Item>
+          <Menu.Item
+            key="logout"
+            icon={<a href="" onClick={() => removeAuthDataFromSessionStorage()}><LogoutOutlined /></a>}
+            danger
+          >
+            Logout
+          </Menu.Item>
+        </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <div style={{ margin: '25px 0' }}>
