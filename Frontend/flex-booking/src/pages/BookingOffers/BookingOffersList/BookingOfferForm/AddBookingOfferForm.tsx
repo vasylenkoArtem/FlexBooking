@@ -127,7 +127,7 @@ const AddBookingOfferForm = () => {
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600, textAlign: 'end' }}
+                style={{ maxWidth: 600 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -145,7 +145,7 @@ const AddBookingOfferForm = () => {
                     </Select>
                 </Form.Item>
 
-                <a onClick={showAddLocationForm}>Can't find location? Add new</a>
+                <div style={{ textAlign: 'end' }}>  <a onClick={showAddLocationForm}>Can't find location? Add new</a></div>
 
                 <Form.Item
                     label="Origin"
@@ -156,8 +156,8 @@ const AddBookingOfferForm = () => {
                         {offerLocations?.map(x => <Select.Option value={x.id.toString()}>{getOfferLocationString(x)}</Select.Option>)}
                     </Select>
                 </Form.Item>
+                <div style={{ textAlign: 'end' }}>  <a onClick={showAddLocationForm}>Can't find location? Add new</a></div>
 
-                <a onClick={showAddLocationForm}>Can't find location? Add new</a>
                 <Form.Item
                     label="Destination"
                     name="destinationId"
