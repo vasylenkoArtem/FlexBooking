@@ -15,6 +15,11 @@ enum UserRole {
     Admin = 2
 }
 
+export enum UserRoleLabel {
+    Client = 'Client',
+    Admin = 'Admin'
+}
+
 export type AuthData = {
     userId: number;
     roleId: UserRole;
