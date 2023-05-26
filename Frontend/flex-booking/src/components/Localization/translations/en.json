@@ -46,5 +46,15 @@
     "requiredField": "Field is required",
     "oneOfThemShouldBeSelected": "Fill one of the fields",
     "type": "Type",
-    "dealInfo": "Deal Info"
+    "dealInfo": "Deal Info",
+    "flexBooking": "Flex Booking",
+    "emailRequired": "Email is required",
+    "passRequired": "Password is required",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "signUp": "Sign up",
+    "rememberMe": "Remember me",
+    "signIn": "Sign In",
+    "forgotPass": "Forgot password?",
+    "dontHaveAccSignUp": "Don't have an account? Sign Up"
 }

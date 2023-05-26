@@ -46,5 +46,15 @@
     "requiredField": "Повинно буди заповнене",
     "oneOfThemShouldBeSelected": "Хоча би одне поле повинне бути заповнене",
     "type": "Вид",
-    "dealInfo": "Деталі"
+    "dealInfo": "Деталі",
+    "flexBooking": "Flex Booking",
+    "emailRequired": "Email обов'язковий",
+    "passRequired": "Password обов'язковий",
+    "emailAddress": "Email Address or Username",
+    "password": "Пароль",
+    "signUp": "Регістрація",
+    "rememberMe": "Запам'ятати мене",
+    "signIn": "Увійти",
+    "forgotPass": "Забув пароль?",
+    "dontHaveAccSignUp": "Немає аккаунта? Регістрація"
 }
