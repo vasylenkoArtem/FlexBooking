@@ -12,11 +12,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Copyright from './Copyright';
 import { useEffect, useState } from 'react';
-import sendRequest from '../../helpers/apiHelper';
-import { AuthData, setAuthDataToSessionStorage } from '../../helpers/authHelper';
-import RegisterPage from "./RegisterPage";
+import sendRequest from "../../../helpers/apiHelper";
+import {setAuthDataToSessionStorage} from "../../../helpers/authHelper";
+import RegisterPage from "../Register/RegisterPage";
+import Copyright from "../Copyright";
+import './style.css';
 
 const theme = createTheme();
 
@@ -131,7 +132,7 @@ const Login = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link onClick={loadRegisterPage} variant="body2">
+                <Link onClick={loadRegisterPage} variant="body2" className={"signup-button"}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

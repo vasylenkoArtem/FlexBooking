@@ -12,10 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Copyright from './Copyright';
 import { useEffect, useState } from 'react';
-import sendRequest from '../../helpers/apiHelper';
-import { AuthData, setAuthDataToSessionStorage } from '../../helpers/authHelper';
+import sendRequest from "../../../helpers/apiHelper";
+import {setAuthDataToSessionStorage} from "../../../helpers/authHelper";
+import Copyright from "../Copyright";
 
 const theme = createTheme();
 
@@ -23,7 +23,7 @@ const Register = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const signInUser = (email: string, password: string) => {
+    const registerUser = (email: string, password: string) => {
         setIsLoading(true)
         //mock response from server
         // setAuthDataToSessionStorage({
@@ -55,7 +55,7 @@ const Register = () => {
         const email = data.get('email')?.toString() as string;
         const password = data.get('password')?.toString() as string;
 
-        signInUser(email, password);
+        registerUser(email, password);
     };
 
     const [errorMessage, setErrorMessage] = useState<any>();
@@ -103,10 +103,6 @@ const Register = () => {
                             id="password"
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
 
                         <Button
                             type="submit"
@@ -114,20 +110,8 @@ const Register = () => {
                             variant="contained"
                             sx={{ mt: 0, mb: 2 }}
                         >
-                            Sign In
+                            Sign Up
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 8, mb: 4 }} />
