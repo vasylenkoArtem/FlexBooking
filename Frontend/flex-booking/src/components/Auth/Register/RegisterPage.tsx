@@ -23,6 +23,9 @@ const Register = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const [formErrors, setFormErrors] = useState<any>({});
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    
     const registerUser = (email: string, password: string) => {
         setIsLoading(true)
         //mock response from server
@@ -55,7 +58,26 @@ const Register = () => {
         const email = data.get('email')?.toString() as string;
         const password = data.get('password')?.toString() as string;
 
-        registerUser(email, password);
+        const errors: any = {};
+
+        // Check for empty email field
+        if (!email) {
+            errors.email = 'Email is required';
+        }
+
+        // Check for empty password field
+        if (!password) {
+            errors.password = 'Password is required';
+        }
+
+        // Set the formErrors state
+        setFormErrors(errors);
+
+        // If there are no errors, proceed with form submission
+        if (Object.keys(errors).length === 0) {
+            setIsSubmitting(true);
+            registerUser(email, password);
+        }
     };
 
     const [errorMessage, setErrorMessage] = useState<any>();
@@ -92,6 +114,8 @@ const Register = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            error={!!formErrors.email} // Add error prop
+                            helperText={formErrors.email} // Display error message
                         />
                         <TextField
                             margin="normal"
@@ -102,6 +126,8 @@ const Register = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            error={!!formErrors.password} // Add error prop
+                            helperText={formErrors.password} // Display error message
                         />
 
                         <Button
@@ -109,6 +135,7 @@ const Register = () => {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 0, mb: 2 }}
+                            disabled={isSubmitting}
                         >
                             Sign Up
                         </Button>
