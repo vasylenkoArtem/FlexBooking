@@ -1,9 +1,12 @@
-import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Modal, Select } from "antd";
+import { Button, Checkbox, Form, Input, InputNumber, Modal, Select } from "antd";
 import { useEffect, useState } from "react";
 import { BookingOfferDto, OfferLocation } from "./types";
 import sendRequest from "../../../../helpers/apiHelper";
 import { useTranslation } from "react-i18next";
 import AddOfferLocationForm from "../AddOfferLocation/AddOfferLocationForm";
+import { DatePicker, Space } from 'antd';
+
+const { RangePicker } = DatePicker;
 
 const AddBookingOfferForm = () => {
 
@@ -36,7 +39,14 @@ const AddBookingOfferForm = () => {
     }
 
     const onFinish = (values: any) => {
-        addBookingOffer(values as BookingOfferDto);
+        const departureDate = values.dateRange[0];
+        const arrivalDate = values.dateRange[1];
+
+        addBookingOffer({
+           ...values,
+           departureDate,
+           arrivalDate
+        } as BookingOfferDto);
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -92,6 +102,10 @@ const AddBookingOfferForm = () => {
     }
 
     const { t } = useTranslation();
+
+    function disabledDate(current: any) {
+        return current && current.valueOf() < Date.now();
+      }
 
     return <>
         <Button type="primary" onClick={showModal}>
@@ -165,19 +179,11 @@ const AddBookingOfferForm = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label={t('depDate').toString()}
-                    name="departureDate"
-                    rules={[{ required: true, message: t('depDateIsRequired').toString() }]}
+                    label={t('dateRange').toString()}
+                    name="dateRange"
+                    rules={[{ required: true, message: t('dateRangeRequired').toString() }]}
                 >
-                    <DatePicker showTime />
-                </Form.Item>
-
-                <Form.Item
-                    label={t('arrDate').toString()}
-                    name="arrivalDate"
-                    rules={[{ required: true, message: t('arrDateRequired').toString() }]}
-                >
-                    <DatePicker showTime />
+                    <RangePicker showTime disabledDate={disabledDate}/>
                 </Form.Item>
 
                 <Form.Item
