@@ -9,9 +9,8 @@ import BookingOfferDetailsPage from './pages/BookingOffers/BoolingOfferDetailsPa
 import { isAdminUser, removeAuthDataFromSessionStorage, UserRoleLabel } from './helpers/authHelper';
 import BookingPage from "./pages/Booking/BookingPage";
 import React from "react";
-import { setupLocalization } from './components/Localization/localizationHelper';
+import { changeLanguageWithLocalStorage, setupLocalization } from './components/Localization/localizationHelper';
 import { LanguageOutlined } from '@mui/icons-material';
-import { changeLanguage } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 const { Header, Content, Footer } = Layout;
@@ -67,10 +66,10 @@ const App: React.FC = () => {
             <a href={`/trips`}>{t('trips.title')}</a>
           </Menu.Item>
           <Menu.Item key="hotels" icon={<BankOutlined />}>
-            <a href={`/hotels`}>Hotels</a>
+            <a href={`/hotels`}>{t('hotels.title')}</a>
           </Menu.Item>
           <Menu.Item key="car-rentals" icon={<CarOutlined />}>
-            <a href={`/car-rentals`}>Car Rentals</a>
+            <a href={`/car-rentals`}>{t('carRentals.title')}</a>
           </Menu.Item>
           <Menu.Item key="profile" style={{ marginLeft: "auto" }} icon={<UserOutlined />}>
             {isAdminUser() ? UserRoleLabel.Admin : UserRoleLabel.Client}
@@ -80,7 +79,7 @@ const App: React.FC = () => {
             icon={<a href="" onClick={() => removeAuthDataFromSessionStorage()}><LogoutOutlined /></a>}
             danger
           >
-            Logout
+            {t('logout')}
           </Menu.Item>
           <Menu.SubMenu
             key="subLanguage"
@@ -89,14 +88,14 @@ const App: React.FC = () => {
             <Menu.Item
               key="en"
               icon={<LanguageOutlined />}
-              onClick={(event: any) => changeLanguage("en")}
+              onClick={(event: any) => changeLanguageWithLocalStorage("en")}
             >
               English
             </Menu.Item>
             <Menu.Item
               key="ua"
               icon={<LanguageOutlined />}
-              onClick={(event: any) => changeLanguage("ua")}
+              onClick={(event: any) => changeLanguageWithLocalStorage("ua")}
             >
               Ukrainian
             </Menu.Item>

@@ -2,6 +2,7 @@ import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Modal, Select }
 import { useEffect, useState } from "react";
 import { BookingOfferDto, OfferLocation } from "./types";
 import sendRequest from "../../../../helpers/apiHelper";
+import { useTranslation } from "react-i18next";
 
 const AddBookingOfferForm = () => {
 
@@ -84,17 +85,17 @@ const AddBookingOfferForm = () => {
             });
     }
 
-    const getOfferLocationString = (location: OfferLocation) => {
+    const getOfferLocationString = (location: OfferLocation, translate: any) => {
         if (location.airportCode != undefined) {
-            return `${location.city}, ${location.airportCode}, Airport`;
+            return `${location.city}, ${location.airportCode}, ${translate('airport')}`;
         }
 
         if (location.busStation != undefined) {
-            return `${location.city}, ${location.busStation}, Bus Station`;
+            return `${location.city}, ${location.busStation}, ${translate('busStation')}`;
         }
 
         if (location.trainStation != undefined) {
-            return `${location.city}, ${location.trainStation}, Train Station`;
+            return `${location.city}, ${location.trainStation}, ${translate('trainStation')}`;
         }
 
         return 'unknown';
@@ -113,12 +114,14 @@ const AddBookingOfferForm = () => {
         )
     }
 
+    const { t } = useTranslation();
+
     return <>
         <Button type="primary" onClick={showModal}>
-            Add Booking Offer
+            {t('addBookingOfferButton')}
         </Button>
         <Modal
-            title="Add Booking Offer"
+            title={t('addBookingOfferButton')}
             open={isModalOpen}
             onCancel={handleCancel}
             footer={null}
@@ -134,18 +137,18 @@ const AddBookingOfferForm = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Offer Type"
+                    label={t('offerType')}
                     name="offerTypeId"
-                    rules={[{ required: true, message: 'Please input Offer Type' }]}
+                    rules={[{ required: true, message: t('offerTypeRequired').toString() }]}
                 >
                     <Select>
-                        <Select.Option value="1">Flight</Select.Option>
-                        <Select.Option value="2">Train</Select.Option>
-                        <Select.Option value="3">Bus</Select.Option>
+                        <Select.Option value="1">{t('flight')}</Select.Option>
+                        <Select.Option value="2">{t('train')}</Select.Option>
+                        <Select.Option value="3">{t('bus')}</Select.Option>
                     </Select>
                 </Form.Item>
 
-                <div style={{ textAlign: 'end' }}>  <a onClick={showAddLocationForm}>Can't find location? Add new</a></div>
+                <div style={{ textAlign: 'end' }}>  <a onClick={showAddLocationForm}>{t('cantFindAnLocation')}</a></div>
 
                 <Form.Item
                     label="Origin"
@@ -153,71 +156,71 @@ const AddBookingOfferForm = () => {
                     rules={[{ required: true, message: 'Please select origin' }]}
                 >
                     <Select>
-                        {offerLocations?.map(x => <Select.Option value={x.id.toString()}>{getOfferLocationString(x)}</Select.Option>)}
+                        {offerLocations?.map(x => <Select.Option value={x.id.toString()}>{getOfferLocationString(x, t)}</Select.Option>)}
                     </Select>
                 </Form.Item>
-                <div style={{ textAlign: 'end' }}>  <a onClick={showAddLocationForm}>Can't find location? Add new</a></div>
+                <div style={{ textAlign: 'end' }}>  <a onClick={showAddLocationForm}>{t('cantFindAnLocation')}</a></div>
 
                 <Form.Item
-                    label="Destination"
+                    label={t('destination')}
                     name="destinationId"
-                    rules={[{ required: true, message: 'Please select destination' }]}
+                    rules={[{ required: true, message: t('destinationRequired').toString() }]}
                 >
                     <Select>
-                        {offerLocations?.map(x => <Select.Option value={x.id.toString()}>{getOfferLocationString(x)}</Select.Option>)}
+                        {offerLocations?.map(x => <Select.Option value={x.id.toString()}>{getOfferLocationString(x, t)}</Select.Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
-                    label="Company Logo URL"
+                    label={t('companyLogoUrl').toString()}
                     name="companyLogoUrl"
-                    rules={[{ required: true, message: 'Please input URL' }]}
+                    rules={[{ required: true, message: t('urlIsRequired').toString() }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    label="Price"
+                    label={t('price')}
                     name="price"
-                    rules={[{ required: true, message: 'Please input price' }]}
+                    rules={[{ required: true, message: t('priceIsRequired').toString() }]}
                 >
                     <InputNumber />
                 </Form.Item>
 
                 <Form.Item
-                    label="Departure Date"
+                    label={t('depDate').toString()}
                     name="departureDate"
-                    rules={[{ required: true, message: 'Please input departure date' }]}
+                    rules={[{ required: true, message: t('depDateIsRequired').toString() }]}
                 >
                     <DatePicker showTime />
                 </Form.Item>
 
                 <Form.Item
-                    label="Arrival Date"
+                    label={t('arrDate').toString()}
                     name="arrivalDate"
-                    rules={[{ required: true, message: 'Please input arrival date' }]}
+                    rules={[{ required: true, message: t('arrDateRequired').toString() }]}
                 >
                     <DatePicker showTime />
                 </Form.Item>
 
                 <Form.Item
-                    label="Passenger Seats"
+                    label={t('passengerSeats').toString()}
                     name="availablePassengerSeats"
-                    rules={[{ required: true, message: 'Please amount of seats' }]}
+                    rules={[{ required: true, message: t('passengersSeatsRequired').toString() }]}
                 >
                     <InputNumber />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit" loading={isLoading}>
-                        Submit
+                        {t('submit')}
                     </Button>
                 </Form.Item>
             </Form>
         </Modal>
 
         <Modal
-            title="Add Location"
+            title={t('addLocation').toString()}
             open={isLocationModalOpen}
             onCancel={handleLocationModalCancelCancel}
             onOk={() => addOfferLocation(offerLocation as OfferLocation)}
@@ -230,22 +233,22 @@ const AddBookingOfferForm = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="City"
+                    label={t('city').toString()}
                 >
                     <Input onChange={(x: any) => onOfferLocationChange('city', x.target.value)} />
                 </Form.Item>
                 <Form.Item
-                    label="Airport code"
+                    label={t('airportCode').toString()}
                 >
                     <Input onChange={(x: any) => onOfferLocationChange('airportCode', x.target.value)} />
                 </Form.Item>
                 <Form.Item
-                    label="Train station"
+                    label={t('trainStation').toString()}
                 >
                     <Input onChange={(x: any) => onOfferLocationChange('trainStation', x.target.value)} />
                 </Form.Item>
                 <Form.Item
-                    label="Bus station"
+                    label={t('busStation').toString()}
                 >
                     <Input onChange={(x: any) => onOfferLocationChange('busStation', x.target.value)} />
                 </Form.Item>
