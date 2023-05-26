@@ -7,7 +7,7 @@ import PassengerInformationFormItems from "./WizardSteps/PassengerInformationFor
 import AdditionalServicesFormItems from "./WizardSteps/AdditionalServicesFormItems";
 import PaymentFormItems from "./WizardSteps/PaymentFormItems";
 import DownloadTicketFormItems from "./WizardSteps/DownloadTicketFormItems";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export interface Booking {
     passportFullName: string;
@@ -34,7 +34,7 @@ enum BookingStatus {
 
 const BookingWizard = () => {
     const { t } = useTranslation();
-    
+
     const { bookingId } = useParams<{ bookingId: string }>()
 
     const [booking, setBooking] = useState<Booking | undefined>(undefined);
@@ -199,7 +199,10 @@ const BookingWizard = () => {
                 }
                 {
                     currentStep === 3 &&
-                    <DownloadTicketFormItems email={formValues?.email ?? ""} />
+                    <DownloadTicketFormItems
+                        email={formValues?.email ?? ""}
+                        bookingId={bookingId}
+                    />
                 }
 
                 <Form.Item>
@@ -223,7 +226,7 @@ const BookingWizard = () => {
                         {
                             currentStep === 3 &&
                             <Button type="primary" loading={isLoading} onClick={() => window.open(`/trips`, "_self")}>
-                                Done
+                                {t('done')}
                             </Button>
                         }
                     </div>

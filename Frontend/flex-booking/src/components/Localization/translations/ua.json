@@ -94,5 +94,7 @@
     "selectDate": "Виберіть дату",
     "somethingWentWrong": "Щось пішло не так",
     "bookingDetails": "Деталі бронювання",
-    "carRental": "Оренда машин"
+    "carRental": "Оренда машин",
+    "ticketSent": "Ваш квиток надіслано на електронну адресу:",
+    "ticketid": "Номер Квитка: "
 }

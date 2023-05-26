@@ -94,5 +94,7 @@
     "selectDate": "Select Date",
     "somethingWentWrong": "Something went wrong",
     "bookingDetails": "Booking Details",
-    "carRental": "Car Rentals"
+    "carRental": "Car Rentals",
+    "ticketSent": "Your ticket has been sent to Email:",
+    "ticketid": "Ticket ID: "
 }
