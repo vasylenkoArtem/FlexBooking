@@ -1,48 +1,6 @@
 {
+    "Welcome to React": "Welcome to React and react-i18next",
     "trips": {
         "title": "Подорожі"
-    },
-    "hotels": {
-        "title": "Готелі"
-    },
-    "carRentals": {
-        "title": "Оренда машин"
-    },
-    "logout": "Вийти",
-    "originCity" : "Місто Відправлення",
-    "destinationCity": "Місто Прибуття",
-    "departureDate": "Дата Відправлення",
-    "arrivalDate": "Дата Прибуття",
-    "passengers": "Пасажири",
-    "search": "Пошук",
-    "addBookingOfferButton": "Додати Пропозицію Бронювання",
-    "offerType": "Тип Пропозиції",
-    "offerTypeRequired": "Заповніть Тип Пропозиції",
-    "flight": "Літак",
-    "bus": "Автобус",
-    "train": "Поїзд",
-    "cantFindAnLocation": "Не можете знайти локацію? Додату нову",
-    "destination": "Призначення",
-    "destinationRequired": "Заповніть Призначення",
-    "companyLogoUrl": "URL Логотипу Компанії",
-    "urlIsRequired": "Введіть URL",
-    "priceIsRequired": "Введіть ціну",
-    "depDateIsRequired":  "Введіть дату відправлення",
-    "price":  "Ціна",
-    "depDate": "Дата Відправлення",
-    "arrDate": "Дата Прибуття",
-    "arrDateRequired": "Введіть дату прибуття",
-    "passengerSeats": "Вільні місця",
-    "passengersSeatsRequired": "Введіть кількість місць",
-    "submit": "Відправити",
-    "addLocation": "Добавити сполучення",
-    "city": "Місто",
-    "airportCode": "Код аеропорту",
-    "trainStation": "Залізничний вокзал",
-    "busStation": "Автовокзал",
-    "airport": "Аеропорт",
-    "seeDeal": "Перейти",
-    "fastCheckin": "Швидкий чекін",
-    "fullServiceMaintenance": "Повне сервісне обслуговування",
-    "freeCancellation": "БЕЗКОШТОВНЕ скасування • Передоплата не потрібна"
+    }
 }

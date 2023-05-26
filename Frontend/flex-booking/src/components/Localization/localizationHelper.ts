@@ -1,8 +1,7 @@
-import i18n, { changeLanguage } from "i18next";
+import i18n from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import enTranslations from './translations/en.json'
 import uaTranslations from './translations/ua.json'
-import e from "express";
 
 export const setupLocalization = () => {
     i18n
@@ -19,7 +18,7 @@ export const setupLocalization = () => {
           translation: uaTranslations
         }
       },
-      lng: getLanguageFromLocalStorage(), // if you're using a language detector, do not define the lng option
+      lng: "en", // if you're using a language detector, do not define the lng option
       fallbackLng: "en",
   
       interpolation: {
@@ -28,15 +27,8 @@ export const setupLocalization = () => {
     });
 }
 
-const localStoragePath = "language";
+export const changeLanguage = (language: 'ua' | 'en') => {
+  const { t, i18n } = useTranslation()
 
-export const changeLanguageWithLocalStorage = (language: 'ua' | 'en') => {
-  changeLanguage(language)
-
-  localStorage.setItem(localStoragePath, language);
-
-}
-
-const getLanguageFromLocalStorage = () => {
-  return localStorage.getItem(localStoragePath) ?? "en";
+  i18n.changeLanguage(language)
 }

@@ -1,48 +1,6 @@
 {
+    "Welcome to React": "Welcome to React and react-i18next",
     "trips": {
         "title": "Trips"
-    },
-    "hotels": {
-        "title": "Hotels"
-    },
-    "carRentals": {
-        "title": "Car Rentals"
-    },
-    "logout": "Logout",
-    "originCity" : "Origin City",
-    "destinationCity": "Destination City",
-    "departureDate": "Departure Date",
-    "arrivalDate": "Arrival Date",
-    "passengers": "Passengers",
-    "search": "Search",
-    "addBookingOfferButton": "Add Booking Offer",
-    "offerType": "Offer Type",
-    "offerTypeRequired": "Please input Offer Type",
-    "flight": "Flight",
-    "bus": "Bus",
-    "train": "Train",
-    "cantFindAnLocation": "Can't find location? Add new",
-    "destination": "Destination",
-    "destinationRequired": "Please select destination",
-    "companyLogoUrl": "Company Logo URL",
-    "urlIsRequired": "Please input URL",
-    "priceIsRequired": "Please input price",
-    "depDateIsRequired":  "Please input departure date",
-    "price":  "Price",
-    "depDate": "Departure Date",
-    "arrDate": "Arrival Date",
-    "arrDateRequired": "Please input arrival date",
-    "passengerSeats": "Passenger Seats",
-    "passengersSeatsRequired": "Please input amount of seats",
-    "submit": "Submit",
-    "addLocation": "Add Location",
-    "city": "City",
-    "airportCode": "Airport code",
-    "trainStation": "Train station",
-    "busStation": "Bus station",
-    "airport": "Airport",
-    "seeDeal": "SEE DEAL",
-    "fastCheckin": "Fast check in",
-    "fullServiceMaintenance": "Full service maintenance",
-    "freeCancellation": "FREE cancellation • No prepayment needed"
+    }
 }

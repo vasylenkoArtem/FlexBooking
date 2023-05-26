@@ -1,7 +1,6 @@
 import { Button, Card, Col, Divider, Row } from "antd";
 import moment from "moment";
 import { Service } from "./types";
-import { useTranslation } from "react-i18next";
 
 interface PassedProps {
     service: Service;
@@ -11,7 +10,7 @@ interface PassedProps {
 }
 
 const ServiceShortView = (props: PassedProps) => {
-    const { t } = useTranslation();
+
     return <>
         <Card
             bordered={true}>
@@ -24,9 +23,9 @@ const ServiceShortView = (props: PassedProps) => {
 
                     <br /> <br />
 
-                    <div>{t('fastCheckin')}</div>
-                    <div>{t('fullServiceMaintenance')}</div>
-                    <div style={{ color: 'green' }}>{t('freeCancellation')}</div>
+                    <div>Fast check in</div>
+                    <div>Full service maintenance</div>
+                    <div style={{ color: 'green' }}>FREE cancellation • No prepayment needed</div>
                 </Col>
                 <Col span={1}>
                     <Divider type="vertical" style={{ height: "100%" }} />
@@ -37,7 +36,7 @@ const ServiceShortView = (props: PassedProps) => {
                         onClick={() => window.open(`trips/${props.service.id}`, '_blank')}
                         disabled={props.isActionDisabled}
                     >
-                        {props.actionString ?? t('seeDeal')}
+                        {props.actionString ?? 'SEE DEAL'}
                     </Button>
                 </Col>
             </Row>

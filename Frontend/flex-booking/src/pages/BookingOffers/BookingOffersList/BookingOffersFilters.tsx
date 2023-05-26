@@ -3,7 +3,6 @@ import { GetBookingOfferRequestParameters } from "./types";
 import { useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { getCitiesOptions } from "../../../helpers/citiesHelper";
-import { useTranslation } from "react-i18next";
 
 interface PassedProps {
     applyFilters: (filters: GetBookingOfferRequestParameters) => void;
@@ -24,14 +23,12 @@ const BookingOffersFilters = (props: PassedProps) => {
         setFilters(filterCopy as GetBookingOfferRequestParameters);
     };
 
-    const { t } = useTranslation();
-
     return <>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginRight: '25%', marginLeft: '25%'}}>
             <Select
                 showSearch
                 style={{ width: 160 }}
-                placeholder={t("originCity")}
+                placeholder="Origin City"
                 optionFilterProp="children"
                 onChange={(value: any) => onChangeFilter(value, 'originCity')}
                 filterOption={(input, option) =>
@@ -43,7 +40,7 @@ const BookingOffersFilters = (props: PassedProps) => {
             <Select
                 showSearch
                 style={{ width: 160 }}
-                placeholder={t("destinationCity")}
+                placeholder="Destination City"
                 optionFilterProp="children"
                 onChange={(value: any) => onChangeFilter(value, 'destinationCity')}
                 filterOption={(input, option) =>
@@ -53,18 +50,18 @@ const BookingOffersFilters = (props: PassedProps) => {
             />
 
             <DatePicker
-                placeholder={t("departureDate").toString()}
+                placeholder="Departure Date"
                 onChange={(date, dateString) => onChangeFilter(date, 'departureDate')}
             />
 
             <DatePicker
-                placeholder={t("arrivalDate").toString()}
+                placeholder="Arrival Date"
                 onChange={(date, dateString) => onChangeFilter(date, 'arrivalDate')}
             />
 
             <InputNumber
                 min={1}
-                placeholder={t("passengers").toString()}
+                placeholder="Passengers"
                 onChange={(value: any) => onChangeFilter(value, 'passengersCount')}
             />
 
@@ -72,7 +69,7 @@ const BookingOffersFilters = (props: PassedProps) => {
                 icon={<SearchOutlined />}
                 onClick={() => props.applyFilters(filters)}
             >
-                {t("search")}
+                Search
             </Button>
         </div>
 
