@@ -16,7 +16,7 @@ public class BookingViewModel
     public string? Comment { get; set; }
     public BookingStatusEnum Status { get; set; }
 
-    public string? DestinationCity { get; set; }
+    public string DestinationCity { get; set; }
 
     public BookingViewModel()
     {
@@ -24,7 +24,7 @@ public class BookingViewModel
 
     [JsonConstructor]
     public BookingViewModel(string passportFullName, string passportNumber, string visaNumber, string email, 
-        string phone, int bookingOfferId, int? passengerSeats, float? price, string comment, BookingStatusEnum status, string destinationCity)
+        string phone, int bookingOfferId, int? passengerSeats, float? price, string comment, BookingStatusEnum status)
     {
         PassportFullName = passportFullName;
         PassportNumber = passportNumber;
@@ -36,7 +36,6 @@ public class BookingViewModel
         Price = price;
         Comment = comment;
         Status = status;
-        DestinationCity = destinationCity;
     }
 
     public BookingViewModel(Domain.Models.Booking booking)

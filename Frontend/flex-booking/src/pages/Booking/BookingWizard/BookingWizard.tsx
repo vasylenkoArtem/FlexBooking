@@ -9,11 +9,7 @@ import PaymentFormItems from "./WizardSteps/PaymentFormItems";
 import DownloadTicketFormItems from "./WizardSteps/DownloadTicketFormItems";
 
 export interface Booking {
-    passportFullName: string;
-    passportNumber: string;
-    visaNumber: string;
-    email: string;
-    phone: string;
+    userFullName: string;
     bookingOfferId: number;
     passengerSeats: number;
     price: number;
@@ -36,6 +32,10 @@ const BookingWizard = () => {
     const [currentStep, setCurrentStep] = useState(0);
 
     const [formValues, setFormValues] = useState({});
+
+    // const { data: offer, isIdle } = useGetOffer({ offerId })
+
+    // if (isIdle) return <Spinner />
 
 
     //TODO: Request is send twice
@@ -63,7 +63,7 @@ const BookingWizard = () => {
     const updateBooking = (bookingDto: Booking) => {
         setIsLoading(true)
 
-        sendRequest(`/booking/${bookingId}`, 'PUT', bookingDto)
+        sendRequest(`/booking/${bookingId}`, 'PUT', booking)
             .then((response: any) => {
                 setIsLoading(false)
             })
