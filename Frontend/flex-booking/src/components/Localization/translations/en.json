@@ -47,5 +47,6 @@
     "freeCancellation": "FREE cancellation • No prepayment needed",
     "requiredField": "Field is required",
     "oneOfThemShouldBeSelected": "Fill one of the fields",
-    "type": "Type"
+    "type": "Type",
+    "dealInfo": "Deal Info"
 }

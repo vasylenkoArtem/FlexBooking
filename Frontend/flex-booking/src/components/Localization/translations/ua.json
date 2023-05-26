@@ -47,5 +47,6 @@
     "freeCancellation": "БЕЗКОШТОВНЕ скасування • Передоплата не потрібна",
     "requiredField": "Повинно буди заповнене",
     "oneOfThemShouldBeSelected": "Хоча би одне поле повинне бути заповнене",
-    "type": "Вид"
+    "type": "Вид",
+    "dealInfo": "Деталі"
 }

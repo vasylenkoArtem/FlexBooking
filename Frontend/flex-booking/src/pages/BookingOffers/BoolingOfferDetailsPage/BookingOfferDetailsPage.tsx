@@ -8,6 +8,7 @@ import { CarOffer, HotelOffer } from "../../../components/Services/types";
 import HotelsList from "../../Hotel/HotelsList";
 import { useNavigate } from "react-router-dom";
 import { getAuthDataFromSessionStorage } from "../../../helpers/authHelper";
+import { useTranslation } from "react-i18next";
 
 const getVehicleTypeString = (offerTypeId: OfferType) => {
     switch (offerTypeId) {
@@ -54,6 +55,8 @@ const getDestinationString = (bookingOffer: BookingOffer | undefined) => {
 
 
 const BookingOfferDetailsPage = () => {
+    const { t } = useTranslation();
+
     const history = useNavigate();
 
     const [bookingOffer, setBookingOffer] = useState<BookingOffer | undefined>(undefined);
@@ -132,7 +135,7 @@ const BookingOfferDetailsPage = () => {
    
 
     return <>
-        <Descriptions title="Deal Info" bordered>
+        <Descriptions title={t('dealInfo')} bordered>
             <Descriptions.Item label="Origin">{getOriginString(bookingOffer)}</Descriptions.Item>
             <Descriptions.Item label="Destination">{getDestinationString(bookingOffer)}</Descriptions.Item>
             <Descriptions.Item label="Company">
