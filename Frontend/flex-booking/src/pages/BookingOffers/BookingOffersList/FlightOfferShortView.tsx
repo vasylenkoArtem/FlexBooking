@@ -2,6 +2,7 @@ import { Button, Card, Col, Divider, Row } from "antd";
 import AAIcon from "../../../Icons/AAIcon.png";
 import { BookingOffer, OfferType } from "./types";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 interface PassedProps {
     bookingOffer: BookingOffer;
@@ -9,14 +10,14 @@ interface PassedProps {
 
 
 
-const getVehicleTypeString = (offerTypeId: OfferType) => {
+const getVehicleTypeString = (offerTypeId: OfferType, translationFunc: any) => {
     switch (offerTypeId) {
         case OfferType.Flight:
-            return 'Flight';
+            return translationFunc('flight');
         case OfferType.Train:
-            return 'Train';
+            return translationFunc('train');
         case OfferType.Bus:
-            return 'Bus';
+            return translationFunc('bus');
 
         default:
             return '';
@@ -65,14 +66,17 @@ const getVehicleColor = (bofferTypeId: OfferType) => {
 }
 
 const FlightOfferShortView = (props: PassedProps) => {
+    const { t } = useTranslation();
 
     const duration = moment.duration(moment(props.bookingOffer.arrivalDateUtc).diff(moment(props.bookingOffer.departureDateUtc)));
     const hours = duration.asHours();
 
-    const vehicleType = getVehicleTypeString(props.bookingOffer.offerTypeId);
+    const vehicleType = getVehicleTypeString(props.bookingOffer.offerTypeId, t);
     const originString = getOriginString(props.bookingOffer);
     const destinationString = getDestinationString(props.bookingOffer);
     const vehicleColor = getVehicleColor(props.bookingOffer.offerTypeId);
+
+
 
     return <>
         <Card
@@ -106,7 +110,7 @@ const FlightOfferShortView = (props: PassedProps) => {
                 </Col>
                 <Col span={6} style={{ textAlign: 'center' }}>
                     <h1>${props.bookingOffer.price}</h1>
-                    <Button onClick={() => window.open(`trips/${props.bookingOffer.id}`, '_blank')}>SEE DEAL</Button>
+                    <Button onClick={() => window.open(`trips/${props.bookingOffer.id}`, '_blank')}>{t('seeDeal')}</Button>
                 </Col>
             </Row>
         </Card>
