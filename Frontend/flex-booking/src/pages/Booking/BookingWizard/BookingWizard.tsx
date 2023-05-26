@@ -219,7 +219,7 @@ const BookingWizard = () => {
                         }
                         {
                             currentStep === 3 &&
-                            <Button type="primary" loading={isLoading} onClick={() => window.open(`/trips`)}>
+                            <Button type="primary" loading={isLoading} onClick={() => window.open(`/trips`, "_self")}>
                                 Done
                             </Button>
                         }
