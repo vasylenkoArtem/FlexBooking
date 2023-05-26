@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { CarOffer, HotelOffer } from "../../../../components/Services/types";
 import sendRequest from "../../../../helpers/apiHelper";
 import {useTranslation} from "react-i18next";
+import CarRentalsListSmallView from "../../../CarRentals/CarRentalsListSmallView";
+import HotelListSmallView from "../../../Hotel/HotelListSmallView";
 
 interface PassedProps {
     booking: Booking;
@@ -55,13 +57,13 @@ const AdditionalServicesFormItems = (props: PassedProps) => {
     return <>
 
         <h1>{t('servicesIn')} {props.booking.destinationCity}</h1>
-        <CarRentalsList
+        <CarRentalsListSmallView
             carRentalOffers={carOffers ?? []}
             actionString="SELECT"
             onClickItem={props.onClickCar}
             selectedItemIds={props.selectedCarIds}
         />
-        <HotelsList
+        <HotelListSmallView
             hotelOffers={hotelOffers ?? []}
             actionString="SELECT"
             onClickItem={props.onClickHotel}

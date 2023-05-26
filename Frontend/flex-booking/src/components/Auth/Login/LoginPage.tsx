@@ -14,26 +14,23 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import sendRequest from "../../../helpers/apiHelper";
-import {setAuthDataToSessionStorage} from "../../../helpers/authHelper";
+import { setAuthDataToSessionStorage } from "../../../helpers/authHelper";
 import RegisterPage from "../Register/RegisterPage";
 import Copyright from "../Copyright";
 import './style.css';
+import { useTranslation } from 'react-i18next';
 
 const theme = createTheme();
 
 const Login = () => {
+  const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isRegisterRendered, setIsRegisterRendered] = useState<boolean>(false);
 
   const signInUser = (email: string, password: string) => {
     setIsLoading(true)
-    //mock response from server
-    // setAuthDataToSessionStorage({
-    //     userId : 1,
-    //     roleId: 2,
-    //     } as AuthData);
-
+  
     sendRequest(`/profile/login`, 'POST', {
       username: email,
       password: password
@@ -60,17 +57,13 @@ const Login = () => {
 
     signInUser(email, password);
   };
-  
+
   const loadRegisterPage = () => {
     setIsRegisterRendered(true);
   }
-  
-  const [errorMessage, setErrorMessage] = useState<any>();
-  const [isError, setIsError] = useState<boolean>(false);
-  const [authData, setAuthData] = useState<any>();
 
   const registerPage = (<RegisterPage />);
-  
+
   return isRegisterRendered ? registerPage : (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -97,7 +90,7 @@ const Login = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={t('emailAddress')}
               name="email"
               autoComplete="email"
               autoFocus
@@ -107,14 +100,14 @@ const Login = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={t('password')}
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label={t('rememberMe')}
             />
 
             <Button
@@ -123,17 +116,17 @@ const Login = () => {
               variant="contained"
               sx={{ mt: 0, mb: 2 }}
             >
-              Sign In
+              {t('signIn')}
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  {t('forgotPass')}
                 </Link>
               </Grid>
               <Grid item>
                 <Link onClick={loadRegisterPage} variant="body2" className={"signup-button"}>
-                  {"Don't have an account? Sign Up"}
+                  {t('dontHaveAccSignUp')}
                 </Link>
               </Grid>
             </Grid>

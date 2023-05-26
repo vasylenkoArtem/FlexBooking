@@ -9,6 +9,8 @@ import HotelsList from "../../Hotel/HotelsList";
 import { useNavigate } from "react-router-dom";
 import { getAuthDataFromSessionStorage } from "../../../helpers/authHelper";
 import { useTranslation } from "react-i18next";
+import CarRentalsListSmallView from "../../CarRentals/CarRentalsListSmallView";
+import HotelListSmallView from "../../Hotel/HotelListSmallView";
 
 const getVehicleTypeString = (offerTypeId: OfferType) => {
     switch (offerTypeId) {
@@ -169,7 +171,7 @@ const BookingOfferDetailsPage = () => {
             style={{
                 marginTop: 30
             }}>
-            <CarRentalsList
+            <CarRentalsListSmallView
                 carRentalOffers={carOffers ?? []}
                 isActionDisabled
             />
@@ -181,7 +183,7 @@ const BookingOfferDetailsPage = () => {
             style={{
                 marginTop: 30
             }}>
-            <HotelsList
+            <HotelListSmallView
                 hotelOffers={hotelOffers ?? []}
                 isActionDisabled
             />

@@ -12,38 +12,27 @@ import { useEffect, useState } from 'react';
 import sendRequest from "../../../helpers/apiHelper";
 import {setAuthDataToSessionStorage} from "../../../helpers/authHelper";
 import Copyright from "../Copyright";
+import { useTranslation } from 'react-i18next';
 
 const theme = createTheme();
 
 const Register = () => {
-
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-
+    const { t } = useTranslation();
+    
     const [formErrors, setFormErrors] = useState<any>({});
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     
     const registerUser = (email: string, password: string) => {
-        setIsLoading(true)
-        //mock response from server
-        // setAuthDataToSessionStorage({
-        //     userId : 1,
-        //     roleId: 2,
-        //     } as AuthData);
-
         sendRequest(`/profile/register`, 'POST', {
             username: email,
             password: password
         })
             .then((response: any) => {
                 setAuthDataToSessionStorage(response);
-
-                setIsLoading(false)
-
                 window.location.reload();
             })
             .catch((error: any) => {
                 alert(`Error has been occured during register, error: ${error}`);
-                setIsLoading(false)
             });
     }
 
@@ -58,12 +47,12 @@ const Register = () => {
 
         // Check for empty email field
         if (!email) {
-            errors.email = 'Email is required';
+            errors.email = t('emailRequired');
         }
 
         // Check for empty password field
         if (!password) {
-            errors.password = 'Password is required';
+            errors.password = t('passRequired');
         }
 
         // Set the formErrors state
@@ -75,10 +64,6 @@ const Register = () => {
             registerUser(email, password);
         }
     };
-
-    const [errorMessage, setErrorMessage] = useState<any>();
-    const [isError, setIsError] = useState<boolean>(false);
-    const [authData, setAuthData] = useState<any>();
 
     return (
         <ThemeProvider theme={theme}>
@@ -97,7 +82,7 @@ const Register = () => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        {t('signUp')}
                     </Typography>
 
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -106,7 +91,7 @@ const Register = () => {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label={t('emailAddress')}
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -118,7 +103,7 @@ const Register = () => {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label={t('password')}
                             type="password"
                             id="password"
                             autoComplete="current-password"
@@ -133,7 +118,7 @@ const Register = () => {
                             sx={{ mt: 0, mb: 2 }}
                             disabled={isSubmitting}
                         >
-                            Sign Up
+                            {t('signUp')}
                         </Button>
                     </Box>
                 </Box>

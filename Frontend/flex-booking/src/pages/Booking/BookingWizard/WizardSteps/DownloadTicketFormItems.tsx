@@ -1,11 +1,13 @@
 import { Button } from "antd";
 import {useTranslation} from "react-i18next";
 
-const DownloadTicket = () => {
-    const { t } = useTranslation();
-    
+interface PassedProps{
+    email: string;
+}
+
+const DownloadTicket = (props: PassedProps) => {
     return <>
-        <Button disabled>{t('downloadTicket')}</Button>
+        <b>Your ticket has been sent to Email: {props.email}</b>
     </>
 }
 
