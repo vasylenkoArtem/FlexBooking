@@ -1,5 +1,5 @@
 import { getAuthDataFromSessionStorage } from "../../helpers/authHelper";
-import LoginPage from "./LoginPage";
+import LoginPage from "./Login/LoginPage";
 
 const AuthProvider = (props: any) => {
     const loginPage = (<LoginPage />);
