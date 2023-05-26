@@ -16,12 +16,14 @@ import Copyright from './Copyright';
 import { useEffect, useState } from 'react';
 import sendRequest from '../../helpers/apiHelper';
 import { AuthData, setAuthDataToSessionStorage } from '../../helpers/authHelper';
+import RegisterPage from "./RegisterPage";
 
 const theme = createTheme();
 
 const Login = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isRegisterRendered, setIsRegisterRendered] = useState<boolean>(false);
 
   const signInUser = (email: string, password: string) => {
     setIsLoading(true)
@@ -57,12 +59,18 @@ const Login = () => {
 
     signInUser(email, password);
   };
-
+  
+  const loadRegisterPage = () => {
+    setIsRegisterRendered(true);
+  }
+  
   const [errorMessage, setErrorMessage] = useState<any>();
   const [isError, setIsError] = useState<boolean>(false);
   const [authData, setAuthData] = useState<any>();
 
-  return (
+  const registerPage = (<RegisterPage />);
+  
+  return isRegisterRendered ? registerPage : (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
 
@@ -123,7 +131,7 @@ const Login = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link onClick={loadRegisterPage} variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
