@@ -129,16 +129,16 @@ const BookingOfferDetailsPage = () => {
     }
 
     if (!bookingOffer) {
-        return <>Something went wrong...</>
+        return <>{t('somethingWentWrong')}...</>
     }
     
    
 
     return <>
         <Descriptions title={t('dealInfo')} bordered>
-            <Descriptions.Item label="Origin">{getOriginString(bookingOffer)}</Descriptions.Item>
-            <Descriptions.Item label="Destination">{getDestinationString(bookingOffer)}</Descriptions.Item>
-            <Descriptions.Item label="Company">
+            <Descriptions.Item label={t('origin')}>{getOriginString(bookingOffer)}</Descriptions.Item>
+            <Descriptions.Item label={t('destination')}>{getDestinationString(bookingOffer)}</Descriptions.Item>
+            <Descriptions.Item label={t('company')}>
                 <Image
                     width={80}
                     src={bookingOffer?.companyLogoUrl}
@@ -147,23 +147,23 @@ const BookingOfferDetailsPage = () => {
 
             </Descriptions.Item>
 
-            <Descriptions.Item label="Departure Date">{bookingOffer?.departureDateUtc.toString()}</Descriptions.Item>
-            <Descriptions.Item label="Arrival Date" span={2}>{bookingOffer?.arrivalDateUtc.toString()}</Descriptions.Item>
+            <Descriptions.Item label={t('departureDate')}>{bookingOffer?.departureDateUtc.toString()}</Descriptions.Item>
+            <Descriptions.Item label={t('arrivalDate')} span={2}>{bookingOffer?.arrivalDateUtc.toString()}</Descriptions.Item>
 
-            <Descriptions.Item label="Availability" >
-                <Badge status="processing" text="Available" />
+            <Descriptions.Item label={t('availability')} >
+                <Badge status="processing" text={t('available')} />
             </Descriptions.Item>
-            <Descriptions.Item label="Vehicle type" span={2}>{getVehicleTypeString(bookingOffer?.offerTypeId)}</Descriptions.Item>
+            <Descriptions.Item label={t('vehicleType')} span={2}>{getVehicleTypeString(bookingOffer?.offerTypeId)}</Descriptions.Item>
 
-            <Descriptions.Item label="Price" span={2}>${bookingOffer?.price}</Descriptions.Item>
-            <Descriptions.Item label="Start Booking">
+            <Descriptions.Item label={t('price')} span={2}>${bookingOffer?.price}</Descriptions.Item>
+            <Descriptions.Item label={t('startBooking')}>
                 <Button type="primary" size='middle' onClick={onBookingClick}>
-                    Start Booking
+                    {t('startBooking')}
                 </Button>
             </Descriptions.Item>
         </Descriptions>
 
-        <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Car Rentals</div>
+        <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>{(t('carRental'))}</div>
 
         <div
             style={{
@@ -175,7 +175,7 @@ const BookingOfferDetailsPage = () => {
             />
         </div>
 
-        <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>Hotel Rentals</div>
+        <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "30px" }}>{t('hotelRentals')}</div>
 
         <div
             style={{

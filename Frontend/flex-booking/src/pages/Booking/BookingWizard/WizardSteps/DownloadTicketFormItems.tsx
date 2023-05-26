@@ -1,8 +1,11 @@
 import { Button } from "antd";
+import {useTranslation} from "react-i18next";
 
 const DownloadTicket = () => {
+    const { t } = useTranslation();
+    
     return <>
-        <Button disabled>Download Ticket</Button>
+        <Button disabled>{t('downloadTicket')}</Button>
     </>
 }
 

@@ -5,6 +5,7 @@ import { Booking } from "../BookingWizard";
 import { useEffect, useState } from "react";
 import { CarOffer, HotelOffer } from "../../../../components/Services/types";
 import sendRequest from "../../../../helpers/apiHelper";
+import {useTranslation} from "react-i18next";
 
 interface PassedProps {
     booking: Booking;
@@ -15,7 +16,8 @@ interface PassedProps {
 }
 
 const AdditionalServicesFormItems = (props: PassedProps) => {
-
+    const { t } = useTranslation();
+    
     useEffect(() => {
         if (props.booking) {
             getCarsList(props.booking.destinationCity);
@@ -52,7 +54,7 @@ const AdditionalServicesFormItems = (props: PassedProps) => {
 
     return <>
 
-        <h1>Services in {props.booking.destinationCity}</h1>
+        <h1>{t('servicesIn')} {props.booking.destinationCity}</h1>
         <CarRentalsList
             carRentalOffers={carOffers ?? []}
             actionString="SELECT"

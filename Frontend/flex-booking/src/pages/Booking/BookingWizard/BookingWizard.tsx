@@ -7,6 +7,7 @@ import PassengerInformationFormItems from "./WizardSteps/PassengerInformationFor
 import AdditionalServicesFormItems from "./WizardSteps/AdditionalServicesFormItems";
 import PaymentFormItems from "./WizardSteps/PaymentFormItems";
 import DownloadTicketFormItems from "./WizardSteps/DownloadTicketFormItems";
+import {useTranslation} from "react-i18next";
 
 export interface Booking {
     passportFullName: string;
@@ -32,6 +33,8 @@ enum BookingStatus {
 }
 
 const BookingWizard = () => {
+    const { t } = useTranslation();
+    
     const { bookingId } = useParams<{ bookingId: string }>()
 
     const [booking, setBooking] = useState<Booking | undefined>(undefined);
@@ -77,30 +80,30 @@ const BookingWizard = () => {
 
     const stepItems: StepProps[] = [
         {
-            title: 'User Information',
+            title: t("userInformation"),
             status: userInformationStatus(0),
             icon: <UserOutlined />,
 
         },
         {
-            title: 'Additional Services',
+            title: t("additionalServices"),
             status: userInformationStatus(1),
             icon: <SolutionOutlined />,
         },
         {
-            title: 'Payment',
+            title: t("payment"),
             status: userInformationStatus(2),
             icon: <SketchOutlined />,
         },
         {
-            title: 'Done',
+            title: t("done"),
             status: userInformationStatus(3),
             icon: <SmileOutlined />,
         },
     ];
 
     if (!booking) {
-        return <div>Loading...</div>;
+        return <div>{t('loading')}...</div>;
     }
 
     const onValuesChange = (changedValues: any) => {
@@ -206,13 +209,13 @@ const BookingWizard = () => {
                             type="default" loading={isLoading} style={{ marginRight: 10 }}
                             onClick={() => setCurrentStep(currentStep - 1)}
                         >
-                            Previous
+                            {t('previous')}
                         </Button>
 
                         {
                             currentStep !== 3 &&
                             <Button type="primary" htmlType="submit" loading={isLoading}>
-                                Next
+                                {t('next')}
                             </Button>
                         }
                     </div>

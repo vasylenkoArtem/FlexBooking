@@ -1,39 +1,46 @@
 import { Form, Input, InputNumber } from "antd";
+import {useTranslation} from "react-i18next";
 
 const PassengerInformationFormItems = () => {
+    const { t } = useTranslation();
+
+    const getTranslation = (key: string) => {
+        return t(key) as string;
+    };
+    
     return <>
        <Form.Item
-            label="Passport Number"
+            label={t('passportNumber')}
             name="passportNumber"
-            rules={[{ required: true, message: 'Please input passport number' }]}
+            rules={[{ required: true, message: getTranslation('invalidPassportNumberMessage') }]}
         >
             <Input />
         </Form.Item>
         <Form.Item
-            label="Passport Full Name"
+            label={t('passportFullName')}
             name="passportFullName"
-            rules={[{ required: true, message: 'Please input full name' }]}
+            rules={[{ required: true, message: getTranslation('invalidPassportFullNameMessage') }]}
         >
             <Input />
         </Form.Item>
         <Form.Item
-            label="Visa Number"
+            label={t('visaNumber')}
             name="visaNumber"
-            rules={[{ required: true, message: 'Please input visa number' }]}
+            rules={[{ required: true, message: getTranslation('invalidVisaNumberMessage') }]}
         >
             <Input />
         </Form.Item>
         <Form.Item
-            label="Email"
+            label={t('email')}
             name="email"
-            rules={[{ required: true, message: 'Please input email' }]}
+            rules={[{ required: true, message: getTranslation('invalidEmailMessage') }]}
         >
             <Input />
         </Form.Item>
         <Form.Item
-            label="Phone"
+            label={t('phone')}
             name="phone"
-            rules={[{ required: true, message: 'Please input phone' }]}
+            rules={[{ required: true, message: getTranslation('invalidPhoneMessage') }]}
         >
             <Input />
         </Form.Item>
