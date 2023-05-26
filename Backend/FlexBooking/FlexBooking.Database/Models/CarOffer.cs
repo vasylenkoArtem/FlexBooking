@@ -15,4 +15,5 @@ public class CarOffer
     public decimal Price { get; set; }
     
     public string Title { get; set; }
+    public Booking? Booking { get; set; }
 }

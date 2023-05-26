@@ -4,6 +4,7 @@ using FlexBooking.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlexBooking.Domain.Migrations
 {
     [DbContext(typeof(FlexBookingContext))]
-    partial class FlexBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230526230020_RemovedMaxLegthFromCvv")]
+    partial class RemovedMaxLegthFromCvv
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,6 +39,9 @@ namespace FlexBooking.Domain.Migrations
                     b.Property<int>("BookingOfferId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CarOfferId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -50,6 +56,9 @@ namespace FlexBooking.Domain.Migrations
 
                     b.Property<DateTime?>("ExpiryDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("HotelOfferId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PassengerSeats")
                         .HasColumnType("int");
@@ -129,10 +138,10 @@ namespace FlexBooking.Domain.Migrations
                         new
                         {
                             Id = 1,
-                            ArrivalDateUtc = new DateTime(2023, 5, 27, 5, 6, 37, 549, DateTimeKind.Utc).AddTicks(4495),
+                            ArrivalDateUtc = new DateTime(2023, 5, 27, 5, 0, 20, 742, DateTimeKind.Utc).AddTicks(6080),
                             AvailablePassengerSeats = 100,
                             CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png",
-                            DepartureDateUtc = new DateTime(2023, 5, 26, 23, 6, 37, 549, DateTimeKind.Utc).AddTicks(4493),
+                            DepartureDateUtc = new DateTime(2023, 5, 26, 23, 0, 20, 742, DateTimeKind.Utc).AddTicks(6076),
                             DestinationOfferLocationId = 2,
                             OfferTypeId = 1,
                             OriginOfferLocationId = 1,
@@ -141,10 +150,10 @@ namespace FlexBooking.Domain.Migrations
                         new
                         {
                             Id = 2,
-                            ArrivalDateUtc = new DateTime(2023, 5, 27, 5, 6, 37, 549, DateTimeKind.Utc).AddTicks(4507),
+                            ArrivalDateUtc = new DateTime(2023, 5, 27, 5, 0, 20, 742, DateTimeKind.Utc).AddTicks(6091),
                             AvailablePassengerSeats = 100,
                             CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png",
-                            DepartureDateUtc = new DateTime(2023, 5, 26, 23, 6, 37, 549, DateTimeKind.Utc).AddTicks(4507),
+                            DepartureDateUtc = new DateTime(2023, 5, 26, 23, 0, 20, 742, DateTimeKind.Utc).AddTicks(6090),
                             DestinationOfferLocationId = 4,
                             OfferTypeId = 2,
                             OriginOfferLocationId = 3,
@@ -153,10 +162,10 @@ namespace FlexBooking.Domain.Migrations
                         new
                         {
                             Id = 3,
-                            ArrivalDateUtc = new DateTime(2023, 5, 27, 5, 6, 37, 549, DateTimeKind.Utc).AddTicks(4509),
+                            ArrivalDateUtc = new DateTime(2023, 5, 27, 5, 0, 20, 742, DateTimeKind.Utc).AddTicks(6093),
                             AvailablePassengerSeats = 100,
                             CompanyLogoUrl = "https://user-images.githubusercontent.com/44374504/230798095-0d48cfde-c2b1-4db8-b2ea-8d22b36a3b96.png",
-                            DepartureDateUtc = new DateTime(2023, 5, 26, 23, 6, 37, 549, DateTimeKind.Utc).AddTicks(4508),
+                            DepartureDateUtc = new DateTime(2023, 5, 26, 23, 0, 20, 742, DateTimeKind.Utc).AddTicks(6093),
                             DestinationOfferLocationId = 6,
                             OfferTypeId = 3,
                             OriginOfferLocationId = 5,
@@ -420,20 +429,16 @@ namespace FlexBooking.Domain.Migrations
 
             modelBuilder.Entity("FlexBooking.Domain.Models.CarOffer", b =>
                 {
-                    b.HasOne("FlexBooking.Domain.Models.Booking", "Booking")
+                    b.HasOne("FlexBooking.Domain.Models.Booking", null)
                         .WithMany("CarRentalOffers")
                         .HasForeignKey("BookingId");
-
-                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("FlexBooking.Domain.Models.HotelOffer", b =>
                 {
-                    b.HasOne("FlexBooking.Domain.Models.Booking", "Booking")
+                    b.HasOne("FlexBooking.Domain.Models.Booking", null)
                         .WithMany("HotelOffers")
                         .HasForeignKey("BookingId");
-
-                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("FlexBooking.Domain.Models.Booking", b =>

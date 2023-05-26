@@ -21,12 +21,8 @@ public class Booking
     public User User { get; set; }
     public BookingOffer BookingOffer { get; set; }
 
-
-    public int? CarOfferId { get; set; }
-    public int? HotelOfferId { get; set; }
     public string? CardNumber { get; set; }
     
-    [MaxLength(3)]
     public string? Cvv { get; set; }
 
     public DateTime? ExpiryDate { get; set; }
