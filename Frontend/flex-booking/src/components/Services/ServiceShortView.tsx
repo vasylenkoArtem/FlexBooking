@@ -38,7 +38,7 @@ const ServiceShortView = (props: PassedProps) => {
                     <Button
                         onClick={() => props.onClickAction ? props.onClickAction(props.service.id): null}
                         disabled={props.isActionDisabled}
-                        style={props.isActionSelected ? {backgroundColor: "blue"} : {}}
+                        style={props.isActionSelected ? {backgroundColor: "blue", color: "white"} : {}}
                     >
                         {props.actionString ?? t('seeDeal')}
                     </Button>

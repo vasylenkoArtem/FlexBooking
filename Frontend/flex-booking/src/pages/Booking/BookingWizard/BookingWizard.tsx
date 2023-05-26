@@ -196,23 +196,31 @@ const BookingWizard = () => {
                 }
                 {
                     currentStep === 3 &&
-                    <DownloadTicketFormItems />
+                    <DownloadTicketFormItems email={formValues?.email ?? ""} />
                 }
 
                 <Form.Item>
 
                     <div style={{ margin: 10 }}>
-                        <Button
-                            type="default" loading={isLoading} style={{ marginRight: 10 }}
-                            onClick={() => setCurrentStep(currentStep - 1)}
-                        >
-                            Previous
-                        </Button>
-
+                        {
+                            currentStep !== 3 &&
+                            <Button
+                                type="default" loading={isLoading} style={{ marginRight: 10 }}
+                                onClick={() => setCurrentStep(currentStep - 1)}
+                            >
+                                Previous
+                            </Button>
+                        }
                         {
                             currentStep !== 3 &&
                             <Button type="primary" htmlType="submit" loading={isLoading}>
                                 Next
+                            </Button>
+                        }
+                        {
+                            currentStep === 3 &&
+                            <Button type="primary" loading={isLoading} onClick={() => window.open(`/trips`)}>
+                                Done
                             </Button>
                         }
                     </div>

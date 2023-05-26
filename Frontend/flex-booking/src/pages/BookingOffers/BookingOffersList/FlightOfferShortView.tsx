@@ -69,7 +69,7 @@ const FlightOfferShortView = (props: PassedProps) => {
     const { t } = useTranslation();
 
     const duration = moment.duration(moment(props.bookingOffer.arrivalDateUtc).diff(moment(props.bookingOffer.departureDateUtc)));
-    const hours = duration.asHours();
+    const hours = Math.round(duration.asHours());
 
     const vehicleType = getVehicleTypeString(props.bookingOffer.offerTypeId, t);
     const originString = getOriginString(props.bookingOffer);

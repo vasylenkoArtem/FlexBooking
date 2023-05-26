@@ -29,7 +29,7 @@
     "priceIsRequired": "Введіть ціну",
     "dateRangeRequired":  "Введіть дати",
     "price":  "Ціна",
-    "dateRange": "Відправлення та Прибуття",
+    "dateRange": "Дати",
     "passengerSeats": "Вільні місця",
     "passengersSeatsRequired": "Введіть кількість місць",
     "submit": "Відправити",

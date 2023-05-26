@@ -1,8 +1,12 @@
 import { Button } from "antd";
 
-const DownloadTicket = () => {
+interface PassedProps{
+    email: string;
+}
+
+const DownloadTicket = (props: PassedProps) => {
     return <>
-        <Button disabled>Download Ticket</Button>
+        <b>Your ticket has been sent to Email: {props.email}</b>
     </>
 }
 
