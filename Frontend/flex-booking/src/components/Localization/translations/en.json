@@ -44,5 +44,8 @@
     "seeDeal": "SEE DEAL",
     "fastCheckin": "Fast check in",
     "fullServiceMaintenance": "Full service maintenance",
-    "freeCancellation": "FREE cancellation • No prepayment needed"
+    "freeCancellation": "FREE cancellation • No prepayment needed",
+    "requiredField": "Field is required",
+    "oneOfThemShouldBeSelected": "Fill one of the fields",
+    "type": "Type"
 }

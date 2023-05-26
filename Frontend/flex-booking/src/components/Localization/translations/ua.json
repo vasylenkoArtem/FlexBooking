@@ -44,5 +44,8 @@
     "seeDeal": "Перейти",
     "fastCheckin": "Швидкий чекін",
     "fullServiceMaintenance": "Повне сервісне обслуговування",
-    "freeCancellation": "БЕЗКОШТОВНЕ скасування • Передоплата не потрібна"
+    "freeCancellation": "БЕЗКОШТОВНЕ скасування • Передоплата не потрібна",
+    "requiredField": "Повинно буди заповнене",
+    "oneOfThemShouldBeSelected": "Хоча би одне поле повинне бути заповнене",
+    "type": "Вид"
 }
