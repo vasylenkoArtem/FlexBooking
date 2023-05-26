@@ -7,6 +7,8 @@ interface PassedProps {
     carRentalOffers: CarOffer[]
     actionString?: string;
     isActionDisabled?: boolean;
+    onClickItem?: (offerId: number) => void;
+    selectedItemIds?: number[];
 }
 
 const CarRentalsList = (props: PassedProps) => {
@@ -32,6 +34,8 @@ const CarRentalsList = (props: PassedProps) => {
                         imageUrl={offer.carImageUrl}
                         actionString={props.actionString}
                         isActionDisabled={props.isActionDisabled}
+                        onClickAction={props.onClickItem}
+                        isActionSelected={props.selectedItemIds?.includes(offer.id)}
                     />
                 </div>
             })}

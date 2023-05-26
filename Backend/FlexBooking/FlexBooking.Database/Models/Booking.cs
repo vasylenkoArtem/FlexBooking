@@ -24,6 +24,13 @@ public class Booking
 
     public int? CarOfferId { get; set; }
     public int? HotelOfferId { get; set; }
-    public CarOffer? CarOffers { get; set; }
-    public HotelOffer? HotelOffers { get; set; }
+    public string? CardNumber { get; set; }
+    
+    [MaxLength(3)]
+    public string? Cvv { get; set; }
+
+    public DateTime? ExpiryDate { get; set; }
+    public string? BillingAddress { get; set; }
+    public List<HotelOffer>? HotelOffers { get; set; }
+    public List<CarOffer>? CarRentalOffers { get; set; }
 }

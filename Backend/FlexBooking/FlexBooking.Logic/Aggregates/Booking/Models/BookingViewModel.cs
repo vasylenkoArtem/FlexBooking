@@ -16,7 +16,11 @@ public class BookingViewModel
     public string? Comment { get; set; }
     public BookingStatusEnum Status { get; set; }
 
-    public string DestinationCity { get; set; }
+    public string? DestinationCity { get; set; }
+    
+    public List<int>? HotelOfferIds { get; set; }
+    
+    public List<int>? CarRentalOfferIds { get; set; }
 
     public BookingViewModel()
     {
@@ -24,7 +28,7 @@ public class BookingViewModel
 
     [JsonConstructor]
     public BookingViewModel(string passportFullName, string passportNumber, string visaNumber, string email, 
-        string phone, int bookingOfferId, int? passengerSeats, float? price, string comment, BookingStatusEnum status)
+        string phone, int bookingOfferId, int? passengerSeats, float? price, string comment, BookingStatusEnum status, string destinationCity)
     {
         PassportFullName = passportFullName;
         PassportNumber = passportNumber;
@@ -36,6 +40,7 @@ public class BookingViewModel
         Price = price;
         Comment = comment;
         Status = status;
+        DestinationCity = destinationCity;
     }
 
     public BookingViewModel(Domain.Models.Booking booking)
@@ -51,5 +56,7 @@ public class BookingViewModel
         Comment = booking.Comment;
         Status = booking.Status;
         DestinationCity = booking.BookingOffer.DestinationOfferLocation.City;
+        CarRentalOfferIds = booking.CarRentalOffers.Select(x => x.Id).ToList();
+        HotelOfferIds = booking.HotelOffers.Select(x => x.Id).ToList();
     }
 }

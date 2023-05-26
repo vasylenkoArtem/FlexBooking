@@ -129,6 +129,8 @@ const BookingOfferDetailsPage = () => {
         return <>Something went wrong...</>
     }
     
+   
+
     return <>
         <Descriptions title="Deal Info" bordered>
             <Descriptions.Item label="Origin">{getOriginString(bookingOffer)}</Descriptions.Item>

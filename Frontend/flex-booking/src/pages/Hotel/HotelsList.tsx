@@ -7,6 +7,8 @@ interface PassedProps {
     hotelOffers: HotelOffer[],
     actionString?: string;
     isActionDisabled?: boolean;
+    onClickItem?: (offerId: number) => void;
+    selectedItemIds?: number[];
 }
 
 const HotelsList = (props: PassedProps) => {
@@ -32,6 +34,8 @@ const HotelsList = (props: PassedProps) => {
                         imageUrl={offer.hotelRoomImageUrl}
                         actionString={props.actionString}
                         isActionDisabled={props.isActionDisabled}
+                        onClickAction={props.onClickItem}
+                        isActionSelected={props.selectedItemIds?.includes(offer.id)}
                     />
                 </div>
             })}

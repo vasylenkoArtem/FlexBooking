@@ -8,6 +8,8 @@ interface PassedProps {
     imageUrl: string;
     actionString?: string;
     isActionDisabled?: boolean;
+    isActionSelected?: boolean;
+    onClickAction?: (offerId: number) => void;
 }
 
 const ServiceShortView = (props: PassedProps) => {
@@ -34,8 +36,9 @@ const ServiceShortView = (props: PassedProps) => {
                 <Col span={6} style={{ textAlign: 'center' }}>
                     <h1>${props.service.price}</h1>
                     <Button
-                        onClick={() => window.open(`trips/${props.service.id}`, '_blank')}
+                        onClick={() => props.onClickAction ? props.onClickAction(props.service.id): null}
                         disabled={props.isActionDisabled}
+                        style={props.isActionSelected ? {backgroundColor: "blue"} : {}}
                     >
                         {props.actionString ?? t('seeDeal')}
                     </Button>

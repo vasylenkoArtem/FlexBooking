@@ -9,13 +9,19 @@ import PaymentFormItems from "./WizardSteps/PaymentFormItems";
 import DownloadTicketFormItems from "./WizardSteps/DownloadTicketFormItems";
 
 export interface Booking {
-    userFullName: string;
+    passportFullName: string;
+    passportNumber: string;
+    visaNumber: string;
+    email: string;
+    phone: string;
     bookingOfferId: number;
     passengerSeats: number;
     price: number;
     comment: string;
     status: BookingStatus;
     destinationCity: string;
+    carRentalOfferIds: number[];
+    hotelOfferIds: number[];
 }
 
 enum BookingStatus {
@@ -31,12 +37,7 @@ const BookingWizard = () => {
     const [booking, setBooking] = useState<Booking | undefined>(undefined);
     const [currentStep, setCurrentStep] = useState(0);
 
-    const [formValues, setFormValues] = useState({});
-
-    // const { data: offer, isIdle } = useGetOffer({ offerId })
-
-    // if (isIdle) return <Spinner />
-
+    const [formValues, setFormValues] = useState<Booking>();
 
     //TODO: Request is send twice
     useEffect(() => {
@@ -44,6 +45,7 @@ const BookingWizard = () => {
         sendRequest(`/booking/${bookingId}`, 'GET')
             .then((response: Booking) => {
                 setBooking(response);
+                setFormValues(response)
             })
             .catch((error: any) => {
                 alert(`Error has been occured during getting of booking, error: ${error}`);
@@ -63,7 +65,7 @@ const BookingWizard = () => {
     const updateBooking = (bookingDto: Booking) => {
         setIsLoading(true)
 
-        sendRequest(`/booking/${bookingId}`, 'PUT', booking)
+        sendRequest(`/booking/${bookingId}`, 'PUT', bookingDto)
             .then((response: any) => {
                 setIsLoading(false)
             })
@@ -114,6 +116,42 @@ const BookingWizard = () => {
         updateBooking(formValues as Booking);
     }
 
+    const onClickHotel = (hotelOfferId: number) => {
+        if (!formValues) { return; }
+
+        let newHotelOfferIds = [...formValues?.hotelOfferIds];
+        if (newHotelOfferIds.includes(hotelOfferId)) {
+            newHotelOfferIds = newHotelOfferIds.filter(x => x !== hotelOfferId);
+        }
+        else {
+            newHotelOfferIds.push(hotelOfferId);
+        }
+
+        setFormValues({
+            ...formValues,
+            hotelOfferIds: newHotelOfferIds
+
+        } as Booking);
+    }
+
+    const onClickCar = (carOfferId: number) => {
+        if (!formValues) { return; }
+
+        let newCarOfferIds = [...formValues?.carRentalOfferIds];
+        if (newCarOfferIds.includes(carOfferId)) {
+            newCarOfferIds = newCarOfferIds.filter(x => x !== carOfferId);
+        }
+        else {
+            newCarOfferIds.push(carOfferId);
+        }
+
+        setFormValues({
+            ...formValues,
+            carRentalOfferIds: newCarOfferIds
+
+        } as Booking);
+    }
+
     return <>
 
         <Steps
@@ -129,7 +167,13 @@ const BookingWizard = () => {
         >
             {
                 currentStep === 1 &&
-                <AdditionalServicesFormItems booking={booking} />
+                <AdditionalServicesFormItems
+                    booking={booking}
+                    onClickHotel={onClickHotel}
+                    onClickCar={onClickCar}
+                    selectedHotelIds={formValues?.hotelOfferIds ?? []}
+                    selectedCarIds={formValues?.carRentalOfferIds ?? []}
+                />
             }
             <Form
                 name="basic"
@@ -156,6 +200,7 @@ const BookingWizard = () => {
                 }
 
                 <Form.Item>
+
                     <div style={{ margin: 10 }}>
                         <Button
                             type="default" loading={isLoading} style={{ marginRight: 10 }}

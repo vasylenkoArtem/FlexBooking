@@ -8,6 +8,10 @@ import sendRequest from "../../../../helpers/apiHelper";
 
 interface PassedProps {
     booking: Booking;
+    onClickHotel: (hotelOfferId: number) => void;
+    onClickCar: (carOfferId: number) => void;
+    selectedHotelIds: number[]; 
+    selectedCarIds: number[]; 
 }
 
 const AdditionalServicesFormItems = (props: PassedProps) => {
@@ -52,12 +56,14 @@ const AdditionalServicesFormItems = (props: PassedProps) => {
         <CarRentalsList
             carRentalOffers={carOffers ?? []}
             actionString="SELECT"
-            isActionDisabled={true}
+            onClickItem={props.onClickCar}
+            selectedItemIds={props.selectedCarIds}
         />
         <HotelsList
             hotelOffers={hotelOffers ?? []}
             actionString="SELECT"
-            isActionDisabled={true}
+            onClickItem={props.onClickHotel}
+            selectedItemIds={props.selectedHotelIds}
         />
 
     </>
